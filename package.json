@@ -1,16 +1,22 @@
 {
   "name": "estrutura-prototipo",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Protótipo independente de análise elástica de vigas biapoiadas",
   "scripts": {
-    "build": "tsc && node scripts/build.mjs",
+    "build": "tsc --noEmit && node scripts/build.mjs",
     "start": "python3 -m backend.server",
     "test": "python3 -m unittest discover -s tests -v",
     "test:browser": "python3 scripts/smoke_browser.py",
+    "validate": "python3 scripts/validate_calculations.py",
     "check": "tsc --noEmit"
   },
   "devDependencies": {
+    "@types/three": "0.186.0",
+    "esbuild": "0.28.2",
     "typescript": "7.0.2"
+  },
+  "dependencies": {
+    "three": "0.186.1"
   }
 }

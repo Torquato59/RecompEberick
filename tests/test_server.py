@@ -54,6 +54,15 @@ class HTTPIntegration(unittest.TestCase):
         self.assertAlmostEqual(result["extrema"]["moment_kn_m"], 54)
         self.assertAlmostEqual(result["extrema"]["deflection_mm"], 3.24)
         self.assertGreaterEqual(len(result["samples"]), 201)
+        self.assertAlmostEqual(result["elastic_results"]["max_bending_stress_mpa"], 6.48)
+
+    def test_validation_endpoint_returns_independent_comparisons(self):
+        status, _headers, body = self.request("GET", "/api/validation")
+        self.assertEqual(status, 200)
+        report = json.loads(body)
+        self.assertTrue(report["passed"])
+        self.assertEqual(report["passed_checks"], 90)
+        self.assertEqual(report["total_cases"], 10)
 
     def test_invalid_requests_return_useful_errors(self):
         cases = [

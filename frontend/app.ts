@@ -1,21 +1,5 @@
-type BeamInput = {
-  span_m: number;
-  elastic_modulus_gpa: number;
-  width_m: number;
-  height_m: number;
-  uniform_load_kn_m: number;
-  point_load_kn: number;
-  point_position_m: number;
-};
-type Sample = { x_m: number; side: string; shear_kn: number; moment_kn_m: number; deflection_mm: number };
-type Result = {
-  method: string;
-  inertia_m4: number;
-  reactions: { left_kn: number; right_kn: number };
-  extrema: { moment_kn_m: number; moment_position_m: number; deflection_mm: number; deflection_position_m: number; absolute_shear_kn: number };
-  equilibrium: { force_residual_kn: number; moment_residual_kn_m: number };
-  samples: Sample[];
-};
+import { BeamView3D } from './beam3d.js';
+import type { BeamInput, Result, ValidationReport } from './types.js';
 type ChartKey = 'shear_kn' | 'moment_kn_m' | 'deflection_mm';
 
 function get<T extends Element>(selector: string): T {
@@ -37,6 +21,9 @@ let editVersion = 0;
 let requestId = 0;
 let busy = false;
 let dirty = true;
+let view3D: BeamView3D | null = null;
+let sceneUnavailable = false;
+let validationReport: ValidationReport | null = null;
 const example: BeamInput = { span_m: 6, elastic_modulus_gpa: 30, width_m: 0.2, height_m: 0.5, uniform_load_kn_m: 12, point_load_kn: 0, point_position_m: 3 };
 
 function fmt(value: number, digits = 2): string {
@@ -81,6 +68,7 @@ function updateButtons(): void {
   importButton.disabled = busy;
   exportButton.disabled = busy || dirty || !lastResult;
   printButton.disabled = busy || dirty || !lastResult;
+  document.querySelectorAll<HTMLButtonElement>('[data-case-id]').forEach(button => { button.disabled = busy; });
   calculateButton.textContent = busy ? 'Calculando…' : 'Calcular estrutura →';
 }
 function markDirty(): void {
@@ -103,6 +91,7 @@ function drawBeam(model: BeamInput): void {
   svg.replaceChildren();
   svg.append(svgElement('title', {}, `Viga com vão de ${fmt(model.span_m)} metros, carga distribuída de ${fmt(model.uniform_load_kn_m)} kN/m e pontual de ${fmt(model.point_load_kn)} kN.`));
   const start = 92, end = 808, beamY = 118;
+  const textScale = svg.clientWidth < 500 ? 1.5 : 1;
   const xAt = (x: number): number => start + (end - start) * x / model.span_m;
   // Linha de base, seção e apoios A (articulação) e B (rolete).
   svg.append(svgElement('rect', { x: start, y: beamY, width: end - start, height: 9, rx: 1, fill: '#294a55' }));
@@ -113,7 +102,7 @@ function drawBeam(model: BeamInput): void {
     }
     const groundY = name === 'B' ? 159 : 153;
     svg.append(svgElement('path', { d: `M${x - 22},${groundY}h44`, stroke: '#9aadb1', 'stroke-width': 1 }));
-    svg.append(svgElement('text', { x, y: 177, 'text-anchor': 'middle', fill: '#48676c', 'font-size': 12, 'font-weight': 600 }, name));
+    svg.append(svgElement('text', { x, y: 177, 'text-anchor': 'middle', fill: '#48676c', 'font-size': 12 * textScale, 'font-weight': 600 }, name));
   }
   const arrow = (x: number, top: number, bottom: number, color: string): void => {
     svg.append(svgElement('path', { d: `M${x},${top}V${bottom}m-4,-7l4,7l4,-7`, fill: 'none', stroke: color, 'stroke-width': 1.6, 'stroke-linecap': 'round' }));
@@ -121,18 +110,18 @@ function drawBeam(model: BeamInput): void {
   if (model.uniform_load_kn_m > 0) {
     svg.append(svgElement('path', { d: `M${start},61H${end}`, stroke: '#62b9a9', 'stroke-width': 1.2 }));
     for (let i = 0; i <= 20; i++) arrow(start + (end - start) * i / 20, 61, 109, '#62b9a9');
-    svg.append(svgElement('text', { x: (start + end) / 2, y: 43, 'text-anchor': 'middle', fill: '#3d8e80', 'font-size': 12 }, `q = ${compact(model.uniform_load_kn_m)} kN/m`));
+    svg.append(svgElement('text', { x: (start + end) / 2, y: 43, 'text-anchor': 'middle', fill: '#3d8e80', 'font-size': 12 * textScale }, `q = ${compact(model.uniform_load_kn_m)} kN/m`));
   }
   if (model.point_load_kn > 0) {
     const x = xAt(model.point_position_m);
     arrow(x, 28, 113, '#b27b38');
     svg.append(svgElement('rect', { x: x - 59, y: 7, width: 118, height: 19, rx: 3, fill: '#fffaf0' }));
-    svg.append(svgElement('text', { x, y: 20, 'text-anchor': 'middle', fill: '#a07136', 'font-size': 11 }, `P = ${compact(model.point_load_kn)} kN`));
-    svg.append(svgElement('text', { x: x + (x > 700 ? -12 : 12), y: 101, 'text-anchor': x > 700 ? 'end' : 'start', fill: '#a07136', 'font-size': 9 }, `a = ${fmt(model.point_position_m)} m`));
+    svg.append(svgElement('text', { x, y: 20, 'text-anchor': 'middle', fill: '#a07136', 'font-size': 11 * textScale }, `P = ${compact(model.point_load_kn)} kN`));
+    svg.append(svgElement('text', { x: x + (x > 700 ? -12 : 12), y: 101, 'text-anchor': x > 700 ? 'end' : 'start', fill: '#a07136', 'font-size': 9 * textScale }, `a = ${fmt(model.point_position_m)} m`));
   }
   svg.append(svgElement('path', { d: `M${start},192v15m0,-7H${end}m0,-8v15`, fill: 'none', stroke: '#a6b8ba', 'stroke-width': 1 }));
   svg.append(svgElement('rect', { x: 386, y: 190, width: 128, height: 20, fill: '#fff' }));
-  svg.append(svgElement('text', { x: 450, y: 204, 'text-anchor': 'middle', fill: '#789196', 'font-size': 11 }, `${fmt(model.span_m)} m`));
+  svg.append(svgElement('text', { x: 450, y: 204, 'text-anchor': 'middle', fill: '#789196', 'font-size': 11 * textScale }, `${fmt(model.span_m)} m`));
   get('#span-summary').textContent = `L = ${fmt(model.span_m)} m`;
 }
 
@@ -208,6 +197,18 @@ function metric(selector: string, value: number, unit: string): void {
 }
 function render(model: BeamInput, result: Result): void {
   drawBeam(model);
+  if (!sceneUnavailable) {
+    try {
+      view3D ??= new BeamView3D(get('#beam-3d'), get('#scene-status'));
+      view3D.update(model, result);
+    } catch {
+      sceneUnavailable = true;
+      get('#scene-status').textContent = '3D indisponível neste navegador. Os cálculos e o esquema 2D continuam disponíveis.';
+      get('#beam-3d').textContent = 'Ative a aceleração gráfica ou use um navegador com WebGL 2.';
+      document.querySelectorAll<HTMLButtonElement>('.scene-controls button').forEach(button => { button.disabled = true; });
+      get<HTMLInputElement>('#show-deformed').disabled = true;
+    }
+  }
   metric('#reaction-a', result.reactions.left_kn, 'kN');
   metric('#reaction-b', result.reactions.right_kn, 'kN');
   metric('#max-moment', result.extrema.moment_kn_m, 'kN·m');
@@ -220,6 +221,27 @@ function render(model: BeamInput, result: Result): void {
   const loads = document.createElement('div');
   loads.textContent = `q = ${compact(model.uniform_load_kn_m)} kN/m · P = ${compact(model.point_load_kn)} kN · a = ${fmt(model.point_position_m)} m`;
   properties.append(loads);
+  const elastic = result.elastic_results;
+  metric('#bending-stress', elastic.max_bending_stress_mpa, 'MPa');
+  metric('#shear-stress', elastic.max_shear_stress_mpa, 'MPa');
+  metric('#total-load', elastic.total_load_kn, 'kN');
+  get('#rotation-a').textContent = `${fmt(elastic.left_rotation_mrad, 3)} mrad`;
+  get('#rotation-b').textContent = `${fmt(elastic.right_rotation_mrad, 3)} mrad`;
+  get('#section-area').textContent = `${compact(result.section.area_m2 * 10000)} cm²`;
+  get('#section-modulus').textContent = `${compact(result.section.section_modulus_m3 * 1e6)} cm³`;
+  get('#flexural-rigidity').textContent = `${compact(result.flexural_rigidity_kn_m2)} kN·m²`;
+  get('#calculation-memory').textContent = [
+    `A = b × h = ${result.section.area_m2.toExponential(6)} m²`,
+    `I = b × h³ / 12 = ${result.inertia_m4.toExponential(6)} m⁴`,
+    `W = I / (h/2) = ${result.section.section_modulus_m3.toExponential(6)} m³`,
+    `EI = E × 10⁶ × I = ${compact(result.flexural_rigidity_kn_m2)} kN·m²`,
+    `RA = qL/2 + P(L−a)/L = ${compact(result.reactions.left_kn)} kN`,
+    `RB = qL/2 + Pa/L = ${compact(result.reactions.right_kn)} kN`,
+    `σmáx = Mmáx / W / 1000 = ${compact(elastic.max_bending_stress_mpa)} MPa`,
+    `τmáx = 1,5 × |Vmáx| / A / 1000 = ${compact(elastic.max_shear_stress_mpa)} MPa`,
+    `θA = δ′(0) = ${fmt(elastic.left_rotation_mrad, 3)} mrad`,
+    `θB = δ′(L) = ${fmt(elastic.right_rotation_mrad, 3)} mrad`,
+  ].join('\n');
   const force = result.equilibrium.force_residual_kn;
   const moment = result.equilibrium.moment_residual_kn_m;
   const load = model.uniform_load_kn_m * model.span_m + model.point_load_kn;
@@ -311,13 +333,68 @@ fileInput.addEventListener('change', async () => {
   }
 });
 printButton.addEventListener('click', () => { if (!dirty && lastResult) window.print(); });
+get<HTMLInputElement>('#show-deformed').addEventListener('change', event => {
+  view3D?.setDeformed((event.target as HTMLInputElement).checked);
+});
+get('#reset-camera').addEventListener('click', () => view3D?.reset());
+get('#zoom-in').addEventListener('click', () => view3D?.zoom(0.8));
+get('#zoom-out').addEventListener('click', () => view3D?.zoom(1.25));
+
+async function loadValidation(): Promise<void> {
+  const status = get('#validation-status');
+  try {
+    const response = await fetch('/api/validation', { signal: AbortSignal.timeout(15_000) });
+    if (!response.ok) throw new Error('Não foi possível obter os casos de referência.');
+    validationReport = await response.json() as ValidationReport;
+    status.textContent = `${validationReport.passed_cases}/${validationReport.total_cases} casos · ${validationReport.passed_checks}/${validationReport.total_checks} comparações dentro da tolerância`;
+    status.classList.toggle('validation-failed', !validationReport.passed);
+    const tbody = get('#validation-body');
+    tbody.replaceChildren();
+    for (const test of validationReport.cases) {
+      const row = document.createElement('tr');
+      const values = [test.label, ...['left_kn', 'right_kn', 'moment_kn_m', 'deflection_mm'].map(quantity => compact(test.checks.find(check => check.quantity === quantity)!.analytical)), test.passed ? 'Conferido' : 'Divergência'];
+      for (const value of values) { const cell = document.createElement('td'); cell.textContent = value; row.append(cell); }
+      row.lastElementChild!.classList.add(test.passed ? 'check-passed' : 'check-failed');
+      const action = document.createElement('td');
+      const button = document.createElement('button');
+      button.className = 'button case-button';
+      button.type = 'button';
+      button.textContent = 'Carregar';
+      button.dataset.caseId = test.id;
+      button.setAttribute('aria-label', `Carregar caso: ${test.label}`);
+      button.addEventListener('click', () => {
+        if (busy) return;
+        writeModel(test.model);
+        markDirty();
+        void runCalculation({ ...test.model });
+      });
+      action.append(button); row.append(action); tbody.append(row);
+    }
+    get<HTMLButtonElement>('#download-validation').disabled = false;
+    updateButtons();
+  } catch (error) {
+    status.textContent = error instanceof Error ? error.message : 'Conferência indisponível.';
+    status.classList.add('validation-failed');
+  }
+}
+get('#download-validation').addEventListener('click', () => {
+  if (!validationReport) return;
+  const url = URL.createObjectURL(new Blob([JSON.stringify(validationReport, null, 2)], { type: 'application/json' }));
+  const anchor = document.createElement('a');
+  anchor.href = url; anchor.download = 'estrutura-conferencia-elastica.json'; anchor.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
 let resizeTimer: ReturnType<typeof setTimeout>;
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(() => {
-    if (lastResult && lastModel) drawChart('deflection', lastResult, lastModel, 'deflection_mm', 'mm', true);
+    if (lastResult && lastModel) {
+      drawBeam(lastModel);
+      drawChart('deflection', lastResult, lastModel, 'deflection_mm', 'mm', true);
+    }
   }, 100);
 });
 writeModel(example);
 updateButtons();
 void runCalculation({ ...example });
+void loadValidation();

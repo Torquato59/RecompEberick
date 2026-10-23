@@ -139,18 +139,31 @@ class Beam:
                     "shear_kn": self.shear(x, side),
                     "moment_kn_m": self.moment(x),
                     "deflection_mm": self.deflection(x) * 1000,
+                    "rotation_mrad": self.slope(x) * 1000,
                 })
+        maximum_shear = max(abs(s["shear_kn"]) for s in samples)
+        maximum_moment = max(0.0, self.moment(moment_x))
+        area = self.data.width_m * self.data.height_m
+        section_modulus = self.inertia / (self.data.height_m / 2)
         return {
             "method": "Euler–Bernoulli · solução analítica · EI constante",
             "inertia_m4": self.inertia,
             "flexural_rigidity_kn_m2": self.ei,
+            "section": {"area_m2": area, "section_modulus_m3": section_modulus},
+            "elastic_results": {
+                "total_load_kn": self.q * self.length + self.p,
+                "max_bending_stress_mpa": maximum_moment / section_modulus / 1000,
+                "max_shear_stress_mpa": 1.5 * maximum_shear / area / 1000,
+                "left_rotation_mrad": self.slope(0) * 1000,
+                "right_rotation_mrad": self.slope(self.length) * 1000,
+            },
             "reactions": {"left_kn": self.left_reaction, "right_kn": self.right_reaction},
             "extrema": {
-                "moment_kn_m": max(0.0, self.moment(moment_x)),
+                "moment_kn_m": maximum_moment,
                 "moment_position_m": moment_x,
                 "deflection_mm": max(0.0, self.deflection(deflection_x) * 1000),
                 "deflection_position_m": deflection_x,
-                "absolute_shear_kn": max(abs(s["shear_kn"]) for s in samples),
+                "absolute_shear_kn": maximum_shear,
             },
             "equilibrium": {
                 "force_residual_kn": self.left_reaction + self.right_reaction - self.q * self.length - self.p,

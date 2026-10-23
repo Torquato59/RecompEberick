@@ -7,6 +7,7 @@ from pathlib import Path
 from urllib.parse import urlsplit
 
 from .beam import ValidationError, calculate
+from verification.report import run_validation
 
 DIST = Path(__file__).resolve().parent.parent / "dist"
 MAX_BODY_BYTES = 16_384
@@ -32,7 +33,10 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_GET(self):
         if urlsplit(self.path).path == "/api/health":
-            self.json_response(200, {"status": "ok", "version": "0.1.0"})
+            self.json_response(200, {"status": "ok", "version": "0.2.0"})
+            return
+        if urlsplit(self.path).path == "/api/validation":
+            self.json_response(200, run_validation())
             return
         if urlsplit(self.path).path not in {"/", "/index.html", "/app.js", "/styles.css"}:
             self.json_response(404, {"error": "Recurso não encontrado."})

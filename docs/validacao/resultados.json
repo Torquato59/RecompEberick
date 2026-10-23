@@ -1,0 +1,992 @@
+{
+  "method": "Elementos finitos de Euler–Bernoulli; rigidez, forças consistentes e interpolação de Hermite",
+  "relative_tolerance": 3e-06,
+  "absolute_tolerance": 1e-08,
+  "cases": [
+    {
+      "id": "uniform",
+      "label": "Carga distribuída",
+      "model": {
+        "span_m": 6.0,
+        "elastic_modulus_gpa": 30.0,
+        "width_m": 0.2,
+        "height_m": 0.5,
+        "uniform_load_kn_m": 12.0,
+        "point_load_kn": 0.0,
+        "point_position_m": 3.0
+      },
+      "elements": 32,
+      "checks": [
+        {
+          "quantity": "left_kn",
+          "analytical": 36.0,
+          "reference": 35.99999999998545,
+          "absolute_error": 1.4551915228366852e-11,
+          "relative_error": 4.042198674547982e-13,
+          "tolerance": 0.00010800999999995634,
+          "passed": true
+        },
+        {
+          "quantity": "right_kn",
+          "analytical": 36.0,
+          "reference": 36.00000000003274,
+          "absolute_error": 3.2741809263825417e-11,
+          "relative_error": 9.094947017721011e-13,
+          "tolerance": 0.00010801000000009822,
+          "passed": true
+        },
+        {
+          "quantity": "moment_kn_m",
+          "analytical": 54.0,
+          "reference": 53.99999999997306,
+          "absolute_error": 2.6936675112665398e-11,
+          "relative_error": 4.988273169014599e-13,
+          "tolerance": 0.0001620099999999192,
+          "passed": true
+        },
+        {
+          "quantity": "deflection_mm",
+          "analytical": 3.2399999999999998,
+          "reference": 3.239999999998475,
+          "absolute_error": 1.524558257415265e-12,
+          "relative_error": 4.705426720419699e-13,
+          "tolerance": 9.729999999995426e-06,
+          "passed": true
+        },
+        {
+          "quantity": "absolute_shear_kn",
+          "analytical": 36.0,
+          "reference": 36.00000000003274,
+          "absolute_error": 3.2741809263825417e-11,
+          "relative_error": 9.094947017721011e-13,
+          "tolerance": 0.00010801000000009822,
+          "passed": true
+        },
+        {
+          "quantity": "left_rotation_mrad",
+          "analytical": 1.728,
+          "reference": 1.727999999998858,
+          "absolute_error": 1.141975403129436e-12,
+          "relative_error": 6.608653953299715e-13,
+          "tolerance": 5.193999999996574e-06,
+          "passed": true
+        },
+        {
+          "quantity": "right_rotation_mrad",
+          "analytical": -1.728,
+          "reference": -1.7279999999997635,
+          "absolute_error": 2.3647750424515834e-13,
+          "relative_error": 1.3685040754930018e-13,
+          "tolerance": 5.193999999999291e-06,
+          "passed": true
+        },
+        {
+          "quantity": "max_bending_stress_mpa",
+          "analytical": 6.48,
+          "reference": 6.4799999999967675,
+          "absolute_error": 3.232969447708456e-12,
+          "relative_error": 4.989150382268625e-13,
+          "tolerance": 1.9449999999990305e-05,
+          "passed": true
+        },
+        {
+          "quantity": "max_shear_stress_mpa",
+          "analytical": 0.54,
+          "reference": 0.5400000000004911,
+          "absolute_error": 4.910516437917067e-13,
+          "relative_error": 9.093548959097411e-13,
+          "tolerance": 1.6300000000014733e-06,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "center",
+      "label": "Pontual no centro",
+      "model": {
+        "span_m": 6.0,
+        "elastic_modulus_gpa": 30.0,
+        "width_m": 0.2,
+        "height_m": 0.5,
+        "uniform_load_kn_m": 0,
+        "point_load_kn": 20,
+        "point_position_m": 3.0
+      },
+      "elements": 32,
+      "checks": [
+        {
+          "quantity": "left_kn",
+          "analytical": 10.0,
+          "reference": 9.999999999994543,
+          "absolute_error": 5.4569682106375694e-12,
+          "relative_error": 5.456968210640547e-13,
+          "tolerance": 3.000999999998363e-05,
+          "passed": true
+        },
+        {
+          "quantity": "right_kn",
+          "analytical": 10.0,
+          "reference": 10.000000000010004,
+          "absolute_error": 1.000444171950221e-11,
+          "relative_error": 1.00044417194922e-12,
+          "tolerance": 3.0010000000030014e-05,
+          "passed": true
+        },
+        {
+          "quantity": "moment_kn_m",
+          "analytical": 30.0,
+          "reference": 29.99999999998718,
+          "absolute_error": 1.2821743666791008e-11,
+          "relative_error": 4.273914555598829e-13,
+          "tolerance": 9.000999999996154e-05,
+          "passed": true
+        },
+        {
+          "quantity": "deflection_mm",
+          "analytical": 1.4400000000000002,
+          "reference": 1.439999999999314,
+          "absolute_error": 6.861178292183467e-13,
+          "relative_error": 4.764707147351899e-13,
+          "tolerance": 4.329999999997942e-06,
+          "passed": true
+        },
+        {
+          "quantity": "absolute_shear_kn",
+          "analytical": 10.0,
+          "reference": 10.000000000046384,
+          "absolute_error": 4.638422979041934e-11,
+          "relative_error": 4.638422979020419e-12,
+          "tolerance": 3.0010000000139156e-05,
+          "passed": true
+        },
+        {
+          "quantity": "left_rotation_mrad",
+          "analytical": 0.7200000000000001,
+          "reference": 0.7199999999994933,
+          "absolute_error": 5.06816810741384e-13,
+          "relative_error": 7.039122371413065e-13,
+          "tolerance": 2.1699999999984796e-06,
+          "passed": true
+        },
+        {
+          "quantity": "right_rotation_mrad",
+          "analytical": -0.7200000000000001,
+          "reference": -0.7199999999998806,
+          "absolute_error": 1.1945999744966684e-13,
+          "relative_error": 1.6591666312456479e-13,
+          "tolerance": 2.1699999999996417e-06,
+          "passed": true
+        },
+        {
+          "quantity": "max_bending_stress_mpa",
+          "analytical": 3.6,
+          "reference": 3.5999999999984618,
+          "absolute_error": 1.538325022920617e-12,
+          "relative_error": 4.273125063670206e-13,
+          "tolerance": 1.0809999999995385e-05,
+          "passed": true
+        },
+        {
+          "quantity": "max_shear_stress_mpa",
+          "analytical": 0.15,
+          "reference": 0.15000000000069577,
+          "absolute_error": 6.957767695325856e-13,
+          "relative_error": 4.6385117968623884e-12,
+          "tolerance": 4.6000000000208734e-07,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "eccentric",
+      "label": "Pontual excêntrica",
+      "model": {
+        "span_m": 6.0,
+        "elastic_modulus_gpa": 30.0,
+        "width_m": 0.2,
+        "height_m": 0.5,
+        "uniform_load_kn_m": 0,
+        "point_load_kn": 23,
+        "point_position_m": 1.7
+      },
+      "elements": 32,
+      "checks": [
+        {
+          "quantity": "left_kn",
+          "analytical": 16.48333333333333,
+          "reference": 16.483333333330847,
+          "absolute_error": 2.48334686148155e-12,
+          "relative_error": 1.5065805024157278e-13,
+          "tolerance": 4.9459999999992544e-05,
+          "passed": true
+        },
+        {
+          "quantity": "right_kn",
+          "analytical": 6.516666666666667,
+          "reference": 6.516666666678248,
+          "absolute_error": 1.1580958414469933e-11,
+          "relative_error": 1.7771291684577012e-12,
+          "tolerance": 1.9560000000034744e-05,
+          "passed": true
+        },
+        {
+          "quantity": "moment_kn_m",
+          "analytical": 28.02166666666666,
+          "reference": 28.02166666664158,
+          "absolute_error": 2.5082158572331537e-11,
+          "relative_error": 8.950987416530301e-13,
+          "tolerance": 8.407499999992474e-05,
+          "passed": true
+        },
+        {
+          "quantity": "deflection_mm",
+          "analytical": 1.274327701612098,
+          "reference": 1.2743277016112466,
+          "absolute_error": 8.5131901528257e-13,
+          "relative_error": 6.680534482662279e-13,
+          "tolerance": 3.83298310483374e-06,
+          "passed": true
+        },
+        {
+          "quantity": "absolute_shear_kn",
+          "analytical": 16.48333333333333,
+          "reference": 16.483333333330847,
+          "absolute_error": 2.48334686148155e-12,
+          "relative_error": 1.5065805024157278e-13,
+          "tolerance": 4.9459999999992544e-05,
+          "passed": true
+        },
+        {
+          "quantity": "left_rotation_mrad",
+          "analytical": 0.7696617777777779,
+          "reference": 0.7696617777772463,
+          "absolute_error": 5.31574784190525e-13,
+          "relative_error": 6.906602348445736e-13,
+          "tolerance": 2.318985333331739e-06,
+          "passed": true
+        },
+        {
+          "quantity": "right_rotation_mrad",
+          "analytical": -0.5753782222222212,
+          "reference": -0.5753782222220072,
+          "absolute_error": 2.1405099914773018e-13,
+          "relative_error": 3.72017902104643e-13,
+          "tolerance": 1.7361346666660215e-06,
+          "passed": true
+        },
+        {
+          "quantity": "max_bending_stress_mpa",
+          "analytical": 3.3625999999999996,
+          "reference": 3.3625999999969896,
+          "absolute_error": 3.0100366643637244e-12,
+          "relative_error": 8.951515685381608e-13,
+          "tolerance": 1.0097799999990969e-05,
+          "passed": true
+        },
+        {
+          "quantity": "max_shear_stress_mpa",
+          "analytical": 0.24724999999999994,
+          "reference": 0.24724999999996272,
+          "absolute_error": 3.722022690055837e-14,
+          "relative_error": 1.5053681254019812e-13,
+          "tolerance": 7.517499999998882e-07,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "combined",
+      "label": "Cargas combinadas",
+      "model": {
+        "span_m": 6.0,
+        "elastic_modulus_gpa": 30.0,
+        "width_m": 0.2,
+        "height_m": 0.5,
+        "uniform_load_kn_m": 12.0,
+        "point_load_kn": 19,
+        "point_position_m": 2
+      },
+      "elements": 33,
+      "checks": [
+        {
+          "quantity": "left_kn",
+          "analytical": 48.666666666666664,
+          "reference": 48.666666665289085,
+          "absolute_error": 1.3775789398096094e-09,
+          "relative_error": 2.8306416572231585e-11,
+          "tolerance": 0.00014600999999586726,
+          "passed": true
+        },
+        {
+          "quantity": "right_kn",
+          "analytical": 42.333333333333336,
+          "reference": 42.33333333277551,
+          "absolute_error": 5.578257855631819e-10,
+          "relative_error": 1.3176987060721236e-11,
+          "tolerance": 0.00012700999999832653,
+          "passed": true
+        },
+        {
+          "quantity": "moment_kn_m",
+          "analytical": 74.67129629629629,
+          "reference": 74.67129629388089,
+          "absolute_error": 2.4154047650881694e-09,
+          "relative_error": 3.234716530943772e-11,
+          "tolerance": 0.00022402388888164267,
+          "passed": true
+        },
+        {
+          "quantity": "deflection_mm",
+          "analytical": 4.40837979264539,
+          "reference": 4.408379238810328,
+          "absolute_error": 5.538350622558141e-07,
+          "relative_error": 1.2563235426298656e-07,
+          "tolerance": 1.3235137716430984e-05,
+          "passed": true
+        },
+        {
+          "quantity": "absolute_shear_kn",
+          "analytical": 48.666666666666664,
+          "reference": 48.666666665289085,
+          "absolute_error": 1.3775789398096094e-09,
+          "relative_error": 2.8306416572231585e-11,
+          "tolerance": 0.00014600999999586726,
+          "passed": true
+        },
+        {
+          "quantity": "left_rotation_mrad",
+          "analytical": 2.4035555555555557,
+          "reference": 2.403555555483565,
+          "absolute_error": 7.19908577195838e-11,
+          "relative_error": 2.995181765420028e-11,
+          "tolerance": 7.2206666664506945e-06,
+          "passed": true
+        },
+        {
+          "quantity": "right_rotation_mrad",
+          "analytical": -2.2684444444444454,
+          "reference": -2.268444444390056,
+          "absolute_error": 5.438938188717657e-11,
+          "relative_error": 2.397651043281375e-11,
+          "tolerance": 6.815333333170168e-06,
+          "passed": true
+        },
+        {
+          "quantity": "max_bending_stress_mpa",
+          "analytical": 8.960555555555555,
+          "reference": 8.960555555265707,
+          "absolute_error": 2.8984814548493887e-10,
+          "relative_error": 3.2347117731400975e-11,
+          "tolerance": 2.689166666579712e-05,
+          "passed": true
+        },
+        {
+          "quantity": "max_shear_stress_mpa",
+          "analytical": 0.73,
+          "reference": 0.7299999999793363,
+          "absolute_error": 2.066369297892834e-11,
+          "relative_error": 2.8306428739059252e-11,
+          "tolerance": 2.1999999999380087e-06,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "mirrored",
+      "label": "Excêntrica espelhada",
+      "model": {
+        "span_m": 6.0,
+        "elastic_modulus_gpa": 30.0,
+        "width_m": 0.2,
+        "height_m": 0.5,
+        "uniform_load_kn_m": 0,
+        "point_load_kn": 23,
+        "point_position_m": 4.3
+      },
+      "elements": 32,
+      "checks": [
+        {
+          "quantity": "left_kn",
+          "analytical": 6.516666666666667,
+          "reference": 6.516666666650963,
+          "absolute_error": 1.5703882638717914e-11,
+          "relative_error": 2.4098029624689143e-12,
+          "tolerance": 1.955999999995289e-05,
+          "passed": true
+        },
+        {
+          "quantity": "right_kn",
+          "analytical": 16.48333333333333,
+          "reference": 16.483333333339942,
+          "absolute_error": 6.611600156247732e-12,
+          "relative_error": 4.011081995699746e-13,
+          "tolerance": 4.946000000001983e-05,
+          "passed": true
+        },
+        {
+          "quantity": "moment_kn_m",
+          "analytical": 28.021666666666665,
+          "reference": 28.021666666636406,
+          "absolute_error": 3.0258462402343866e-11,
+          "relative_error": 1.0798237935779413e-12,
+          "tolerance": 8.407499999990922e-05,
+          "passed": true
+        },
+        {
+          "quantity": "deflection_mm",
+          "analytical": 1.2743277016120975,
+          "reference": 1.2743277016096834,
+          "absolute_error": 2.4140689447449404e-12,
+          "relative_error": 1.8943863040060873e-12,
+          "tolerance": 3.8329831048290505e-06,
+          "passed": true
+        },
+        {
+          "quantity": "absolute_shear_kn",
+          "analytical": 16.483333333333334,
+          "reference": 16.483333333339942,
+          "absolute_error": 6.608047442568932e-12,
+          "relative_error": 4.00892665878642e-13,
+          "tolerance": 4.946000000001983e-05,
+          "passed": true
+        },
+        {
+          "quantity": "left_rotation_mrad",
+          "analytical": 0.5753782222222222,
+          "reference": 0.5753782222209191,
+          "absolute_error": 1.3031797863050087e-12,
+          "relative_error": 2.2649098210127372e-12,
+          "tolerance": 1.736134666662757e-06,
+          "passed": true
+        },
+        {
+          "quantity": "right_rotation_mrad",
+          "analytical": -0.7696617777777776,
+          "reference": -0.7696617777766909,
+          "absolute_error": 1.0866862965031032e-12,
+          "relative_error": 1.4119010815922232e-12,
+          "tolerance": 2.3189853333300724e-06,
+          "passed": true
+        },
+        {
+          "quantity": "max_bending_stress_mpa",
+          "analytical": 3.3626,
+          "reference": 3.3625999999963687,
+          "absolute_error": 3.631317468943962e-12,
+          "relative_error": 1.0799135992826632e-12,
+          "tolerance": 1.0097799999989106e-05,
+          "passed": true
+        },
+        {
+          "quantity": "max_shear_stress_mpa",
+          "analytical": 0.24725,
+          "reference": 0.24725000000009914,
+          "absolute_error": 9.914291609902648e-14,
+          "relative_error": 4.009824715833639e-13,
+          "tolerance": 7.517500000002975e-07,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "stiffer",
+      "label": "Módulo E em dobro",
+      "model": {
+        "span_m": 6.0,
+        "elastic_modulus_gpa": 60,
+        "width_m": 0.2,
+        "height_m": 0.5,
+        "uniform_load_kn_m": 12.0,
+        "point_load_kn": 0.0,
+        "point_position_m": 3.0
+      },
+      "elements": 32,
+      "checks": [
+        {
+          "quantity": "left_kn",
+          "analytical": 36.0,
+          "reference": 35.99999999993088,
+          "absolute_error": 6.912159733474255e-11,
+          "relative_error": 1.9200443704132016e-12,
+          "tolerance": 0.00010800999999979264,
+          "passed": true
+        },
+        {
+          "quantity": "right_kn",
+          "analytical": 36.0,
+          "reference": 35.99999999998181,
+          "absolute_error": 1.8189894035458565e-11,
+          "relative_error": 5.052748343185488e-13,
+          "tolerance": 0.00010800999999994543,
+          "passed": true
+        },
+        {
+          "quantity": "moment_kn_m",
+          "analytical": 54.0,
+          "reference": 53.999999999953786,
+          "absolute_error": 4.6213699533836916e-11,
+          "relative_error": 8.55809250627342e-13,
+          "tolerance": 0.00016200999999986136,
+          "passed": true
+        },
+        {
+          "quantity": "deflection_mm",
+          "analytical": 1.6199999999999999,
+          "reference": 1.619999999997727,
+          "absolute_error": 2.2728485760126205e-12,
+          "relative_error": 1.402992948157907e-12,
+          "tolerance": 4.869999999993181e-06,
+          "passed": true
+        },
+        {
+          "quantity": "absolute_shear_kn",
+          "analytical": 36.0,
+          "reference": 35.99999999998181,
+          "absolute_error": 1.8189894035458565e-11,
+          "relative_error": 5.052748343185488e-13,
+          "tolerance": 0.00010800999999994543,
+          "passed": true
+        },
+        {
+          "quantity": "left_rotation_mrad",
+          "analytical": 0.864,
+          "reference": 0.8639999999984485,
+          "absolute_error": 1.5515366769136563e-12,
+          "relative_error": 1.7957600427273639e-12,
+          "tolerance": 2.6019999999953454e-06,
+          "passed": true
+        },
+        {
+          "quantity": "right_rotation_mrad",
+          "analytical": -0.864,
+          "reference": -0.8639999999990225,
+          "absolute_error": 9.774403508799878e-13,
+          "relative_error": 1.1312967024086732e-12,
+          "tolerance": 2.601999999997068e-06,
+          "passed": true
+        },
+        {
+          "quantity": "max_bending_stress_mpa",
+          "analytical": 6.48,
+          "reference": 6.479999999994455,
+          "absolute_error": 5.545786052607582e-12,
+          "relative_error": 8.558311809586925e-13,
+          "tolerance": 1.9449999999983366e-05,
+          "passed": true
+        },
+        {
+          "quantity": "max_shear_stress_mpa",
+          "analytical": 0.54,
+          "reference": 0.5399999999997271,
+          "absolute_error": 2.728928194528635e-13,
+          "relative_error": 5.053570730611137e-13,
+          "tolerance": 1.6299999999991814e-06,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "taller",
+      "label": "Altura em dobro",
+      "model": {
+        "span_m": 6.0,
+        "elastic_modulus_gpa": 30.0,
+        "width_m": 0.2,
+        "height_m": 1,
+        "uniform_load_kn_m": 12.0,
+        "point_load_kn": 0.0,
+        "point_position_m": 3.0
+      },
+      "elements": 32,
+      "checks": [
+        {
+          "quantity": "left_kn",
+          "analytical": 36.0,
+          "reference": 35.99999999993088,
+          "absolute_error": 6.912159733474255e-11,
+          "relative_error": 1.9200443704132016e-12,
+          "tolerance": 0.00010800999999979264,
+          "passed": true
+        },
+        {
+          "quantity": "right_kn",
+          "analytical": 36.0,
+          "reference": 35.99999999998181,
+          "absolute_error": 1.8189894035458565e-11,
+          "relative_error": 5.052748343185488e-13,
+          "tolerance": 0.00010800999999994543,
+          "passed": true
+        },
+        {
+          "quantity": "moment_kn_m",
+          "analytical": 54.0,
+          "reference": 53.999999999953786,
+          "absolute_error": 4.6213699533836916e-11,
+          "relative_error": 8.55809250627342e-13,
+          "tolerance": 0.00016200999999986136,
+          "passed": true
+        },
+        {
+          "quantity": "deflection_mm",
+          "analytical": 0.40499999999999997,
+          "reference": 0.40499999999943176,
+          "absolute_error": 5.682121440031551e-13,
+          "relative_error": 1.402992948157907e-12,
+          "tolerance": 1.2249999999982953e-06,
+          "passed": true
+        },
+        {
+          "quantity": "absolute_shear_kn",
+          "analytical": 36.0,
+          "reference": 35.99999999998181,
+          "absolute_error": 1.8189894035458565e-11,
+          "relative_error": 5.052748343185488e-13,
+          "tolerance": 0.00010800999999994543,
+          "passed": true
+        },
+        {
+          "quantity": "left_rotation_mrad",
+          "analytical": 0.216,
+          "reference": 0.2159999999996121,
+          "absolute_error": 3.8788416922841407e-13,
+          "relative_error": 1.7957600427273639e-12,
+          "tolerance": 6.579999999988364e-07,
+          "passed": true
+        },
+        {
+          "quantity": "right_rotation_mrad",
+          "analytical": -0.216,
+          "reference": -0.21599999999975564,
+          "absolute_error": 2.4436008771999695e-13,
+          "relative_error": 1.1312967024086732e-12,
+          "tolerance": 6.57999999999267e-07,
+          "passed": true
+        },
+        {
+          "quantity": "max_bending_stress_mpa",
+          "analytical": 1.62,
+          "reference": 1.6199999999986137,
+          "absolute_error": 1.3864465131518955e-12,
+          "relative_error": 8.558311809586925e-13,
+          "tolerance": 4.869999999995841e-06,
+          "passed": true
+        },
+        {
+          "quantity": "max_shear_stress_mpa",
+          "analytical": 0.27,
+          "reference": 0.26999999999986357,
+          "absolute_error": 1.3644640972643174e-13,
+          "relative_error": 5.053570730611137e-13,
+          "tolerance": 8.199999999995908e-07,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "unloaded",
+      "label": "Sem carregamento",
+      "model": {
+        "span_m": 6.0,
+        "elastic_modulus_gpa": 30.0,
+        "width_m": 0.2,
+        "height_m": 0.5,
+        "uniform_load_kn_m": 0,
+        "point_load_kn": 0.0,
+        "point_position_m": 3.0
+      },
+      "elements": 32,
+      "checks": [
+        {
+          "quantity": "left_kn",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_kn",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "deflection_mm",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "absolute_shear_kn",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "left_rotation_mrad",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_rotation_mrad",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "max_bending_stress_mpa",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "max_shear_stress_mpa",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "support",
+      "label": "Pontual no apoio A",
+      "model": {
+        "span_m": 6.0,
+        "elastic_modulus_gpa": 30.0,
+        "width_m": 0.2,
+        "height_m": 0.5,
+        "uniform_load_kn_m": 0,
+        "point_load_kn": 15,
+        "point_position_m": 0
+      },
+      "elements": 32,
+      "checks": [
+        {
+          "quantity": "left_kn",
+          "analytical": 15.0,
+          "reference": 15.0,
+          "absolute_error": 0.0,
+          "relative_error": 0.0,
+          "tolerance": 4.5010000000000004e-05,
+          "passed": true
+        },
+        {
+          "quantity": "right_kn",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "deflection_mm",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "absolute_shear_kn",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "left_rotation_mrad",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_rotation_mrad",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "max_bending_stress_mpa",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "max_shear_stress_mpa",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "shorter",
+      "label": "Outro vão e seção",
+      "model": {
+        "span_m": 4.5,
+        "elastic_modulus_gpa": 25,
+        "width_m": 0.15,
+        "height_m": 0.4,
+        "uniform_load_kn_m": 8,
+        "point_load_kn": 11,
+        "point_position_m": 1.6
+      },
+      "elements": 33,
+      "checks": [
+        {
+          "quantity": "left_kn",
+          "analytical": 25.08888888888889,
+          "reference": 25.088888888585643,
+          "absolute_error": 3.0324542876769556e-10,
+          "relative_error": 1.2086841713650344e-11,
+          "tolerance": 7.527666666575693e-05,
+          "passed": true
+        },
+        {
+          "quantity": "right_kn",
+          "analytical": 21.91111111111111,
+          "reference": 21.911111110986894,
+          "absolute_error": 1.2421708106558071e-10,
+          "relative_error": 5.669136559820306e-12,
+          "tolerance": 6.574333333296068e-05,
+          "passed": true
+        },
+        {
+          "quantity": "moment_kn_m",
+          "analytical": 30.006049382716046,
+          "reference": 30.006049382364203,
+          "absolute_error": 3.518429991800076e-10,
+          "relative_error": 1.1725735524077365e-11,
+          "tolerance": 9.00281481470926e-05,
+          "passed": true
+        },
+        {
+          "quantity": "deflection_mm",
+          "analytical": 3.0640433019900875,
+          "reference": 3.0640429278833707,
+          "absolute_error": 3.741067167162271e-07,
+          "relative_error": 1.220957817894081e-07,
+          "tolerance": 9.202128783650112e-06,
+          "passed": true
+        },
+        {
+          "quantity": "absolute_shear_kn",
+          "analytical": 25.08888888888889,
+          "reference": 25.088888888585643,
+          "absolute_error": 3.0324542876769556e-10,
+          "relative_error": 1.2086841713650344e-11,
+          "tolerance": 7.527666666575693e-05,
+          "passed": true
+        },
+        {
+          "quantity": "left_rotation_mrad",
+          "analytical": 2.2181870370370356,
+          "reference": 2.218187037010702,
+          "absolute_error": 2.6333601965689013e-11,
+          "relative_error": 1.1871677873105325e-11,
+          "tolerance": 6.664561111032106e-06,
+          "passed": true
+        },
+        {
+          "quantity": "right_rotation_mrad",
+          "analytical": -2.095312962962963,
+          "reference": -2.095312962941365,
+          "absolute_error": 2.1597834631847945e-11,
+          "relative_error": 1.0307689120354254e-11,
+          "tolerance": 6.295938888824096e-06,
+          "passed": true
+        },
+        {
+          "quantity": "max_bending_stress_mpa",
+          "analytical": 7.50151234567901,
+          "reference": 7.501512345591049,
+          "absolute_error": 8.79607497950019e-11,
+          "relative_error": 1.1725735524077368e-11,
+          "tolerance": 2.251453703677315e-05,
+          "passed": true
+        },
+        {
+          "quantity": "max_shear_stress_mpa",
+          "analytical": 0.6272222222222222,
+          "reference": 0.6272222222146411,
+          "absolute_error": 7.581157923652881e-12,
+          "relative_error": 1.2086877114915965e-11,
+          "tolerance": 1.8916666666439232e-06,
+          "passed": true
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "passed_cases": 10,
+  "total_cases": 10,
+  "passed_checks": 90,
+  "total_checks": 90,
+  "passed": true
+}
