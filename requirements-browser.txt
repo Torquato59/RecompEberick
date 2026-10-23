@@ -1,0 +1,2 @@
+# Opcional: necessário somente para npm run test:browser.
+playwright==1.62.0

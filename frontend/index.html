@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#112a34" />
+  <title>Estrutura — Laboratório de vigas</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23112a34'/%3E%3Cpath d='M8 24V8h16v16M8 16h16' stroke='%2360d7c5' stroke-width='3' fill='none'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#workspace" aria-label="Estrutura, início"><span class="brand-symbol">∏</span><span>estrutura<span class="brand-sub">LABORATÓRIO ESTRUTURAL</span></span></a>
+    <div class="sidebar-label">ÁREA DE TRABALHO</div>
+    <a class="nav-link active" href="#workspace"><span aria-hidden="true">▱</span> Análise de vigas <span class="nav-count">01</span></a>
+    <a class="nav-link" href="#model-notes"><span aria-hidden="true">≡</span> Notas do modelo</a>
+    <div class="sidebar-bottom"><span class="stage-dot"></span> PRIMEIRO PROTÓTIPO<p>Da geometria ao comportamento estrutural.</p><span class="version">VERSÃO 0.1.0</span></div>
+  </aside>
+
+  <main id="workspace">
+    <header class="topbar"><div class="breadcrumb">Laboratório <span>/</span> Vigas <span>/</span> <strong>V01</strong></div><div class="top-actions"><button type="button" id="import-project" class="button ghost">Abrir projeto</button><button type="button" id="export-project" class="button ghost">Salvar projeto <svg class="action-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8" /></svg></button><input id="project-file" type="file" accept=".json,application/json" hidden /></div></header>
+
+    <section class="page-heading"><div><div class="eyebrow">ANÁLISE ESTRUTURAL · V01</div><h1>Viga biapoiada<span class="heading-dot">.</span></h1><p>Explore como a geometria e as cargas se transformam em esforços.</p></div><button type="button" id="print-report" class="button secondary">Imprimir relatório <svg class="action-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8" /></svg></button></section>
+
+    <div class="work-grid">
+      <section class="panel parameters" aria-labelledby="parameters-title">
+        <div class="panel-heading"><h2 id="parameters-title">Dados do modelo</h2><span class="step-number">01</span></div>
+        <form id="beam-form">
+          <fieldset><legend><span>01</span> Geometria</legend>
+            <label for="span">Vão entre apoios</label><div class="input-unit"><input id="span" name="span_m" type="number" min="0.1" max="100" step="any" value="6" required /><span>m</span></div>
+            <div class="field-row"><div><label for="width">Largura b</label><div class="input-unit"><input id="width" name="width_cm" type="number" min="1" max="1000" step="any" value="20" required /><span>cm</span></div></div><div><label for="height">Altura h</label><div class="input-unit"><input id="height" name="height_cm" type="number" min="1" max="1000" step="any" value="50" required /><span>cm</span></div></div></div>
+            <div class="section-preview" aria-label="Seção retangular"><svg viewBox="0 0 160 95" aria-hidden="true"><rect x="57" y="9" width="40" height="64" rx="1" /><path d="M108 9h8m-4 0v64m-4 0h8M57 82v8m0-4h40m0-4v8" /><text x="120" y="45">h</text><text x="74" y="83">b</text></svg><span>Seção retangular<br /><strong id="section-inertia">I = — m⁴</strong></span></div>
+          </fieldset>
+          <fieldset><legend><span>02</span> Material</legend><label for="elastic-modulus">Módulo de elasticidade E</label><div class="input-unit"><input id="elastic-modulus" name="elastic_modulus_gpa" type="number" min="0.1" max="1000" step="any" value="30" required /><span>GPa</span></div><p class="field-hint">Material homogêneo e comportamento elástico linear.</p></fieldset>
+          <fieldset><legend><span>03</span> Carregamento</legend><label for="uniform-load">Carga distribuída q</label><div class="input-unit"><input id="uniform-load" name="uniform_load_kn_m" type="number" min="0" max="1000000" step="any" value="12" required /><span>kN/m</span></div><label for="point-load">Carga pontual P</label><div class="input-unit"><input id="point-load" name="point_load_kn" type="number" min="0" max="1000000" step="any" value="0" required /><span>kN</span></div><label for="point-position">Posição de P a partir do apoio A</label><div class="input-unit"><input id="point-position" name="point_position_m" type="number" min="0" max="6" step="any" value="3" required /><span>m</span></div><p class="field-hint">Cargas positivas para baixo. Peso próprio deve ser incluído em q.</p></fieldset>
+          <button class="button primary" id="calculate" type="submit">Calcular estrutura <span aria-hidden="true">→</span></button>
+          <button class="button example-button" id="reset-example" type="button">Restaurar exemplo</button>
+        </form>
+      </section>
+
+      <div class="results-column">
+        <div id="feedback" class="feedback" role="status" aria-live="polite">Preparando o modelo…</div>
+        <section class="panel model-panel" aria-labelledby="model-title"><div class="panel-heading"><div><span class="eyebrow">MODELO ANALÍTICO</span><h2 id="model-title">Geometria e carregamento</h2></div><span class="tag">ELÁSTICO LINEAR</span></div><svg id="beam-model" viewBox="0 0 900 230" role="img" aria-label="Diagrama da viga, apoios, dimensões e cargas"></svg><div class="model-properties" id="model-properties"></div><div class="model-footer"><span><i class="legend-line teal"></i> Cargas aplicadas</span><span><i class="legend-line dark"></i> Viga · EI constante</span><span id="span-summary">L = 6,00 m</span></div></section>
+
+        <div class="metrics" aria-label="Resultados principais">
+          <article class="metric"><span>REAÇÃO NO APOIO A</span><strong id="reaction-a">—</strong><small>Vertical · para cima</small></article>
+          <article class="metric"><span>REAÇÃO NO APOIO B</span><strong id="reaction-b">—</strong><small>Vertical · para cima</small></article>
+          <article class="metric accent"><span>MOMENTO MÁXIMO</span><strong id="max-moment">—</strong><small id="moment-location">—</small></article>
+          <article class="metric"><span>FLECHA MÁXIMA</span><strong id="max-deflection">—</strong><small id="deflection-location">—</small></article>
+        </div>
+
+        <section class="panel diagrams" aria-labelledby="diagrams-title"><div class="panel-heading"><div><span class="eyebrow">COMPORTAMENTO DA VIGA</span><h2 id="diagrams-title">Diagramas de resultados</h2></div><span class="tag quiet">VALORES NÃO MAJORADOS</span></div><div class="chart-grid">
+          <article class="chart-card"><div class="chart-header"><h3>Esforço cortante <span>V</span></h3><span>kN</span></div><svg id="shear-chart" class="chart" viewBox="0 0 480 200" role="img" aria-label="Diagrama de esforço cortante"></svg><div id="shear-reading" class="chart-reading">Passe o cursor pelo diagrama</div></article>
+          <article class="chart-card"><div class="chart-header"><h3>Momento fletor <span>M</span></h3><span>kN·m</span></div><svg id="moment-chart" class="chart" viewBox="0 0 480 200" role="img" aria-label="Diagrama de momento fletor, positivo para baixo"></svg><div id="moment-reading" class="chart-reading">Passe o cursor pelo diagrama</div></article>
+          <article class="chart-card deflection-card"><div class="chart-header"><h3>Deslocamento vertical <span>δ</span></h3><span>mm · positivo para baixo</span></div><svg id="deflection-chart" class="chart" viewBox="0 0 960 200" role="img" aria-label="Diagrama de flecha, positivo para baixo"></svg><div id="deflection-reading" class="chart-reading">Deformação representada em escala ampliada</div></article>
+        </div></section>
+
+        <section class="panel notes" id="model-notes" aria-labelledby="notes-title"><div class="panel-heading"><h2 id="notes-title">Hipóteses e interpretação</h2><span class="step-number">i</span></div><div class="notes-grid"><div><h3>O que este modelo calcula</h3><p>Viga de Euler–Bernoulli, seção retangular constante, apoio articulado em A e móvel em B. Pequenos deslocamentos; deformação por cisalhamento desprezada.</p></div><div><h3>Como ler os resultados</h3><p>Momento positivo sagente e flecha positiva para baixo. No cortante, V(x) = R<sub>A</sub> − qx − P após a carga pontual. Cargas sem fatores de combinação.</p></div></div><p class="scope-note">Protótipo de análise elástica. Não realiza dimensionamento normativo, cálculo de armaduras, fissuração ou verificação de segurança.</p><div class="equilibrium" id="equilibrium">Aguardando cálculo para verificar o equilíbrio.</div></section>
+      </div>
+    </div>
+    <footer class="page-footer"><span>ESTRUTURA <span class="footer-separator">/</span> LABORATÓRIO DE VIGAS</span><span>Implementação independente · v0.1.0</span></footer>
+  </main>
+</body>
+</html>
