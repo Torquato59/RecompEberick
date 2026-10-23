@@ -1,5 +1,7 @@
 # Estrutura · Laboratório de vigas
 
+[Imagens e PDF do primeiro protótipo](docs/prototipo/README.md)
+
 Primeiro módulo do projeto RecompEberick: um aplicativo independente para explorar o comportamento de uma viga biapoiada. Núcleo de cálculo em Python, interface em TypeScript e SVG. Não usa código, bibliotecas ou executáveis extraídos do instalador AltoQi. REA permanece como ferramenta separada de análise.
 
 ## Executar
