@@ -143,12 +143,8 @@ def main():
         page.wait_for_function("document.querySelector('.scene-print-image').naturalWidth > 100")
         page.pdf(path=str(artifacts / "relatorio-3d-exemplo.pdf"), format="A4", print_background=True, prefer_css_page_size=True)
         page.emulate_media(media="screen")
-        page.set_viewport_size({"width": 390, "height": 844})
-        expect(page.locator("#deflection-chart")).to_have_attribute("viewBox", "0 0 480 200")
-        assert not page.evaluate("document.documentElement.scrollWidth > innerWidth")
         expect(page.locator("#beam-3d canvas")).to_be_visible()
-        page.screenshot(path=str(artifacts / "prototipo-3d-mobile.png"), full_page=True)
-        print("OK: impressão/PDF e layout em tela de 390 px")
+        print("OK: impressão/PDF e retorno ao layout desktop")
 
         fallback = browser.new_page()
         fallback.add_init_script("""const getContext = HTMLCanvasElement.prototype.getContext;

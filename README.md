@@ -1,5 +1,7 @@
 # Estrutura · Laboratório de vigas
 
+**Escopo atual: manter a versão 0.2 com foco de uso no Windows. Desenvolvimento e testes específicos para celular estão pausados.** A interface, os cálculos e a arquitetura desta versão foram mantidos. As imagens de celular já publicadas são registros históricos; o layout adaptável existente não exige um aplicativo ou serviço móvel separado.
+
 [Imagens e PDF do primeiro protótipo](docs/prototipo/README.md)
 
 [Versão 0.2: modelo 3D e relatórios](docs/prototipo-3d/README.md) · [Conferência independente dos cálculos](docs/validacao/README.md)
@@ -22,7 +24,7 @@ O servidor usa a porta 8000 e escuta apenas na interface local por padrão. Para
 
 `npm run check` verifica os tipos. `npm test` executa os casos analíticos, a validação de entradas e as requisições HTTP reais, incluindo os arquivos compilados; execute o build antes. Os testes HTTP iniciam e encerram um servidor próprio em uma porta livre.
 
-Teste opcional de interface: com Playwright (`requirements-browser.txt`), Chromium e o servidor ativo, execute `npm run test:browser`. O teste cobre cálculo, edição, importação/exportação, resposta atrasada, impressão, tela móvel, rotação/zoom/deformada 3D, atualização das dimensões, casos de referência e fallback sem WebGL; grava imagens e um PDF de exemplo na pasta ignorada `artifacts/`. O Chromium de teste usa SwiftShader para renderizar WebGL em ambiente sem GPU. Se não houver Chromium do sistema, instale o navegador com `python3 -m playwright install chromium`.
+Teste opcional de interface: com Playwright (`requirements-browser.txt`), Chromium e o servidor ativo, execute `npm run test:browser`. O teste cobre cálculo, edição, importação/exportação, resposta atrasada, impressão, layout desktop, rotação/zoom/deformada 3D, atualização das dimensões, casos de referência e fallback sem WebGL; grava imagens e um PDF de exemplo na pasta ignorada `artifacts/`. O Chromium de teste usa SwiftShader para renderizar WebGL em ambiente sem GPU. Se não houver Chromium do sistema, instale o navegador com `python3 -m playwright install chromium`.
 
 ## Usar o protótipo
 

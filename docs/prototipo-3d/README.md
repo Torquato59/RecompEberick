@@ -1,5 +1,7 @@
 # Versão 0.2 · visualização 3D e conferência elástica
 
+Escopo atual: a versão 0.2 foi mantida, com foco de uso no Windows. Desenvolvimento e testes específicos para celular estão pausados. A imagem móvel abaixo e os testes móveis descritos neste registro documentam a versão já produzida; não representam uma frente móvel em desenvolvimento.
+
 A vista espacial foi acrescentada ao lado do esquema 2D existente. É possível girar, aproximar, restaurar a câmera e exibir a deformada com fator visual informado. O cálculo continua sendo de uma viga de Euler–Bernoulli 1D; o volume não representa uma análise por elementos sólidos.
 
 - [Modelos 2D e 3D lado a lado](modelos-2d-3d.png)
