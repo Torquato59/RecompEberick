@@ -18,7 +18,7 @@ def run_validation():
         reference = solve(model)
         values = analytical["reactions"] | analytical["extrema"] | analytical["elastic_results"]
         checks = []
-        for name in ["left_kn", "right_kn", "moment_kn_m", "deflection_mm", "absolute_shear_kn", "left_rotation_mrad", "right_rotation_mrad", "max_bending_stress_mpa", "max_shear_stress_mpa"]:
+        for name in ["left_kn", "right_kn", "left_moment_kn_m", "right_moment_kn_m", "moment_kn_m", "deflection_mm", "absolute_shear_kn", "left_rotation_mrad", "right_rotation_mrad", "max_bending_stress_mpa", "max_shear_stress_mpa"]:
             actual, expected = values[name], reference[name]
             error = abs(actual - expected)
             tolerance = ABSOLUTE_TOLERANCE + RELATIVE_TOLERANCE * abs(expected)

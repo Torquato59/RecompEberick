@@ -1,3 +1,4 @@
+export type SupportType = 'pinned' | 'roller' | 'fixed' | 'free';
 export type BeamInput = {
   span_m: number;
   elastic_modulus_gpa: number;
@@ -6,6 +7,8 @@ export type BeamInput = {
   uniform_load_kn_m: number;
   point_load_kn: number;
   point_position_m: number;
+  support_left?: SupportType;
+  support_right?: SupportType;
 };
 
 export type Sample = {
@@ -15,6 +18,9 @@ export type Sample = {
 
 export type Result = {
   method: string;
+  beam_type: string;
+  supports: { left: SupportType; right: SupportType };
+  integration_constants: { initial_moment_kn_m: number; c_kn_m2: number; d_kn_m3: number };
   inertia_m4: number;
   flexural_rigidity_kn_m2: number;
   section: { area_m2: number; section_modulus_m3: number };
@@ -22,8 +28,8 @@ export type Result = {
     total_load_kn: number; max_bending_stress_mpa: number; max_shear_stress_mpa: number;
     left_rotation_mrad: number; right_rotation_mrad: number;
   };
-  reactions: { left_kn: number; right_kn: number };
-  extrema: { moment_kn_m: number; moment_position_m: number; deflection_mm: number; deflection_position_m: number; absolute_shear_kn: number };
+  reactions: { left_kn: number; right_kn: number; left_moment_kn_m: number; right_moment_kn_m: number };
+  extrema: { moment_kn_m: number; signed_moment_kn_m: number; positive_moment_kn_m: number; negative_moment_kn_m: number; moment_position_m: number; deflection_mm: number; signed_deflection_mm: number; deflection_position_m: number; absolute_shear_kn: number };
   equilibrium: { force_residual_kn: number; moment_residual_kn_m: number };
   samples: Sample[];
 };

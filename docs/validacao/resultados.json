@@ -36,6 +36,24 @@
           "passed": true
         },
         {
+          "quantity": "left_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
           "quantity": "moment_kn_m",
           "analytical": 54.0,
           "reference": 53.99999999997306,
@@ -134,6 +152,24 @@
           "passed": true
         },
         {
+          "quantity": "left_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
           "quantity": "moment_kn_m",
           "analytical": 30.0,
           "reference": 29.99999999998718,
@@ -215,46 +251,64 @@
       "checks": [
         {
           "quantity": "left_kn",
-          "analytical": 16.48333333333333,
+          "analytical": 16.483333333333334,
           "reference": 16.483333333330847,
-          "absolute_error": 2.48334686148155e-12,
-          "relative_error": 1.5065805024157278e-13,
+          "absolute_error": 2.4868995751603507e-12,
+          "relative_error": 1.508735839329055e-13,
           "tolerance": 4.9459999999992544e-05,
           "passed": true
         },
         {
           "quantity": "right_kn",
-          "analytical": 6.516666666666667,
+          "analytical": 6.516666666666666,
           "reference": 6.516666666678248,
-          "absolute_error": 1.1580958414469933e-11,
-          "relative_error": 1.7771291684577012e-12,
+          "absolute_error": 1.1581846592889633e-11,
+          "relative_error": 1.7772654618213377e-12,
           "tolerance": 1.9560000000034744e-05,
           "passed": true
         },
         {
+          "quantity": "left_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
           "quantity": "moment_kn_m",
-          "analytical": 28.02166666666666,
+          "analytical": 28.02166666666667,
           "reference": 28.02166666664158,
-          "absolute_error": 2.5082158572331537e-11,
-          "relative_error": 8.950987416530301e-13,
+          "absolute_error": 2.5089263999689138e-11,
+          "relative_error": 8.953523107016571e-13,
           "tolerance": 8.407499999992474e-05,
           "passed": true
         },
         {
           "quantity": "deflection_mm",
-          "analytical": 1.274327701612098,
+          "analytical": 1.2743277016120977,
           "reference": 1.2743277016112466,
-          "absolute_error": 8.5131901528257e-13,
-          "relative_error": 6.680534482662279e-13,
+          "absolute_error": 8.51096970677645e-13,
+          "relative_error": 6.678792037570296e-13,
           "tolerance": 3.83298310483374e-06,
           "passed": true
         },
         {
           "quantity": "absolute_shear_kn",
-          "analytical": 16.48333333333333,
+          "analytical": 16.483333333333334,
           "reference": 16.483333333330847,
-          "absolute_error": 2.48334686148155e-12,
-          "relative_error": 1.5065805024157278e-13,
+          "absolute_error": 2.4868995751603507e-12,
+          "relative_error": 1.508735839329055e-13,
           "tolerance": 4.9459999999992544e-05,
           "passed": true
         },
@@ -269,28 +323,28 @@
         },
         {
           "quantity": "right_rotation_mrad",
-          "analytical": -0.5753782222222212,
+          "analytical": -0.5753782222222223,
           "reference": -0.5753782222220072,
-          "absolute_error": 2.1405099914773018e-13,
-          "relative_error": 3.72017902104643e-13,
+          "absolute_error": 2.1516122217235534e-13,
+          "relative_error": 3.739474555387957e-13,
           "tolerance": 1.7361346666660215e-06,
           "passed": true
         },
         {
           "quantity": "max_bending_stress_mpa",
-          "analytical": 3.3625999999999996,
+          "analytical": 3.3626000000000005,
           "reference": 3.3625999999969896,
-          "absolute_error": 3.0100366643637244e-12,
-          "relative_error": 8.951515685381608e-13,
+          "absolute_error": 3.0109248427834245e-12,
+          "relative_error": 8.954157029638138e-13,
           "tolerance": 1.0097799999990969e-05,
           "passed": true
         },
         {
           "quantity": "max_shear_stress_mpa",
-          "analytical": 0.24724999999999994,
+          "analytical": 0.24725,
           "reference": 0.24724999999996272,
-          "absolute_error": 3.722022690055837e-14,
-          "relative_error": 1.5053681254019812e-13,
+          "absolute_error": 3.727573805178963e-14,
+          "relative_error": 1.5076132680200303e-13,
           "tolerance": 7.517499999998882e-07,
           "passed": true
         }
@@ -330,20 +384,38 @@
           "passed": true
         },
         {
+          "quantity": "left_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
           "quantity": "moment_kn_m",
-          "analytical": 74.67129629629629,
+          "analytical": 74.67129629629628,
           "reference": 74.67129629388089,
-          "absolute_error": 2.4154047650881694e-09,
-          "relative_error": 3.234716530943772e-11,
+          "absolute_error": 2.415390554233454e-09,
+          "relative_error": 3.2346974997290746e-11,
           "tolerance": 0.00022402388888164267,
           "passed": true
         },
         {
           "quantity": "deflection_mm",
-          "analytical": 4.40837979264539,
+          "analytical": 4.4083797926453885,
           "reference": 4.408379238810328,
-          "absolute_error": 5.538350622558141e-07,
-          "relative_error": 1.2563235426298656e-07,
+          "absolute_error": 5.538350604794573e-07,
+          "relative_error": 1.2563235386003647e-07,
           "tolerance": 1.3235137716430984e-05,
           "passed": true
         },
@@ -358,28 +430,28 @@
         },
         {
           "quantity": "left_rotation_mrad",
-          "analytical": 2.4035555555555557,
+          "analytical": 2.4035555555555552,
           "reference": 2.403555555483565,
-          "absolute_error": 7.19908577195838e-11,
-          "relative_error": 2.995181765420028e-11,
+          "absolute_error": 7.199041363037395e-11,
+          "relative_error": 2.995163289075313e-11,
           "tolerance": 7.2206666664506945e-06,
           "passed": true
         },
         {
           "quantity": "right_rotation_mrad",
-          "analytical": -2.2684444444444454,
+          "analytical": -2.268444444444444,
           "reference": -2.268444444390056,
-          "absolute_error": 5.438938188717657e-11,
-          "relative_error": 2.397651043281375e-11,
+          "absolute_error": 5.438804961954702e-11,
+          "relative_error": 2.3975923128314033e-11,
           "tolerance": 6.815333333170168e-06,
           "passed": true
         },
         {
           "quantity": "max_bending_stress_mpa",
-          "analytical": 8.960555555555555,
+          "analytical": 8.960555555555553,
           "reference": 8.960555555265707,
-          "absolute_error": 2.8984814548493887e-10,
-          "relative_error": 3.2347117731400975e-11,
+          "absolute_error": 2.8984636912809947e-10,
+          "relative_error": 3.2346919489581213e-11,
           "tolerance": 2.689166666579712e-05,
           "passed": true
         },
@@ -420,28 +492,46 @@
         },
         {
           "quantity": "right_kn",
-          "analytical": 16.48333333333333,
+          "analytical": 16.483333333333334,
           "reference": 16.483333333339942,
-          "absolute_error": 6.611600156247732e-12,
-          "relative_error": 4.011081995699746e-13,
+          "absolute_error": 6.608047442568932e-12,
+          "relative_error": 4.00892665878642e-13,
           "tolerance": 4.946000000001983e-05,
           "passed": true
         },
         {
+          "quantity": "left_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
           "quantity": "moment_kn_m",
-          "analytical": 28.021666666666665,
+          "analytical": 28.02166666666667,
           "reference": 28.021666666636406,
-          "absolute_error": 3.0258462402343866e-11,
-          "relative_error": 1.0798237935779413e-12,
+          "absolute_error": 3.026201511602267e-11,
+          "relative_error": 1.0799505781022546e-12,
           "tolerance": 8.407499999990922e-05,
           "passed": true
         },
         {
           "quantity": "deflection_mm",
-          "analytical": 1.2743277016120975,
+          "analytical": 1.274327701612097,
           "reference": 1.2743277016096834,
-          "absolute_error": 2.4140689447449404e-12,
-          "relative_error": 1.8943863040060873e-12,
+          "absolute_error": 2.4136248555350903e-12,
+          "relative_error": 1.89403781498769e-12,
           "tolerance": 3.8329831048290505e-06,
           "passed": true
         },
@@ -456,28 +546,28 @@
         },
         {
           "quantity": "left_rotation_mrad",
-          "analytical": 0.5753782222222222,
+          "analytical": 0.5753782222222221,
           "reference": 0.5753782222209191,
-          "absolute_error": 1.3031797863050087e-12,
-          "relative_error": 2.2649098210127372e-12,
+          "absolute_error": 1.3030687640025462e-12,
+          "relative_error": 2.2647168656693218e-12,
           "tolerance": 1.736134666662757e-06,
           "passed": true
         },
         {
           "quantity": "right_rotation_mrad",
-          "analytical": -0.7696617777777776,
+          "analytical": -0.7696617777777781,
           "reference": -0.7696617777766909,
-          "absolute_error": 1.0866862965031032e-12,
-          "relative_error": 1.4119010815922232e-12,
+          "absolute_error": 1.0872414080154158e-12,
+          "relative_error": 1.4126223224389705e-12,
           "tolerance": 2.3189853333300724e-06,
           "passed": true
         },
         {
           "quantity": "max_bending_stress_mpa",
-          "analytical": 3.3626,
+          "analytical": 3.3626000000000005,
           "reference": 3.3625999999963687,
-          "absolute_error": 3.631317468943962e-12,
-          "relative_error": 1.0799135992826632e-12,
+          "absolute_error": 3.631761558153812e-12,
+          "relative_error": 1.08004566649549e-12,
           "tolerance": 1.0097799999989106e-05,
           "passed": true
         },
@@ -523,6 +613,24 @@
           "absolute_error": 1.8189894035458565e-11,
           "relative_error": 5.052748343185488e-13,
           "tolerance": 0.00010800999999994543,
+          "passed": true
+        },
+        {
+          "quantity": "left_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
           "passed": true
         },
         {
@@ -624,6 +732,24 @@
           "passed": true
         },
         {
+          "quantity": "left_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
           "quantity": "moment_kn_m",
           "analytical": 54.0,
           "reference": 53.999999999953786,
@@ -714,6 +840,24 @@
         },
         {
           "quantity": "right_kn",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "left_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_moment_kn_m",
           "analytical": 0.0,
           "reference": 0.0,
           "absolute_error": 0.0,
@@ -820,6 +964,24 @@
           "passed": true
         },
         {
+          "quantity": "left_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
           "quantity": "moment_kn_m",
           "analytical": 0.0,
           "reference": 0.0,
@@ -918,20 +1080,38 @@
           "passed": true
         },
         {
+          "quantity": "left_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
           "quantity": "moment_kn_m",
-          "analytical": 30.006049382716046,
+          "analytical": 30.00604938271605,
           "reference": 30.006049382364203,
-          "absolute_error": 3.518429991800076e-10,
-          "relative_error": 1.1725735524077365e-11,
+          "absolute_error": 3.518465518936864e-10,
+          "relative_error": 1.172585392399178e-11,
           "tolerance": 9.00281481470926e-05,
           "passed": true
         },
         {
           "quantity": "deflection_mm",
-          "analytical": 3.0640433019900875,
+          "analytical": 3.064043301990087,
           "reference": 3.0640429278833707,
-          "absolute_error": 3.741067167162271e-07,
-          "relative_error": 1.220957817894081e-07,
+          "absolute_error": 3.741067162721379e-07,
+          "relative_error": 1.2209578164447239e-07,
           "tolerance": 9.202128783650112e-06,
           "passed": true
         },
@@ -964,10 +1144,10 @@
         },
         {
           "quantity": "max_bending_stress_mpa",
-          "analytical": 7.50151234567901,
+          "analytical": 7.501512345679011,
           "reference": 7.501512345591049,
-          "absolute_error": 8.79607497950019e-11,
-          "relative_error": 1.1725735524077368e-11,
+          "absolute_error": 8.79616379734216e-11,
+          "relative_error": 1.1725853923991783e-11,
           "tolerance": 2.251453703677315e-05,
           "passed": true
         },
@@ -982,11 +1162,1309 @@
         }
       ],
       "passed": true
+    },
+    {
+      "id": "cantilever_uniform",
+      "label": "Balanço A · distribuída",
+      "model": {
+        "span_m": 6.0,
+        "elastic_modulus_gpa": 30.0,
+        "width_m": 0.2,
+        "height_m": 0.5,
+        "uniform_load_kn_m": 12.0,
+        "point_load_kn": 0.0,
+        "point_position_m": 3.0,
+        "support_left": "fixed",
+        "support_right": "free"
+      },
+      "elements": 32,
+      "checks": [
+        {
+          "quantity": "left_kn",
+          "analytical": 72.0,
+          "reference": 72.00000000043929,
+          "absolute_error": 4.3928594095632434e-10,
+          "relative_error": 6.101193624356169e-12,
+          "tolerance": 0.00021601000000131786,
+          "passed": true
+        },
+        {
+          "quantity": "right_kn",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "left_moment_kn_m",
+          "analytical": 216.0,
+          "reference": 216.0000000027016,
+          "absolute_error": 2.7015971681976225e-09,
+          "relative_error": 1.250739429705478e-11,
+          "tolerance": 0.0006480100000081048,
+          "passed": true
+        },
+        {
+          "quantity": "right_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "moment_kn_m",
+          "analytical": 216.0,
+          "reference": 216.0000000027016,
+          "absolute_error": 2.7015971681976225e-09,
+          "relative_error": 1.250739429705478e-11,
+          "tolerance": 0.0006480100000081048,
+          "passed": true
+        },
+        {
+          "quantity": "deflection_mm",
+          "analytical": 31.104,
+          "reference": 31.104000000550563,
+          "absolute_error": 5.505640388037136e-10,
+          "relative_error": 1.7700747132007724e-11,
+          "tolerance": 9.332200000165169e-05,
+          "passed": true
+        },
+        {
+          "quantity": "absolute_shear_kn",
+          "analytical": 72.0,
+          "reference": 72.00000000043929,
+          "absolute_error": 4.3928594095632434e-10,
+          "relative_error": 6.101193624356169e-12,
+          "tolerance": 0.00021601000000131786,
+          "passed": true
+        },
+        {
+          "quantity": "left_rotation_mrad",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_rotation_mrad",
+          "analytical": 6.912,
+          "reference": 6.912000000140214,
+          "absolute_error": 1.4021406258279967e-10,
+          "relative_error": 2.0285599331590762e-11,
+          "tolerance": 2.0746000000420644e-05,
+          "passed": true
+        },
+        {
+          "quantity": "max_bending_stress_mpa",
+          "analytical": 25.92,
+          "reference": 25.92000000032419,
+          "absolute_error": 3.241886759042245e-10,
+          "relative_error": 1.2507279162815191e-11,
+          "tolerance": 7.777000000097257e-05,
+          "passed": true
+        },
+        {
+          "quantity": "max_shear_stress_mpa",
+          "analytical": 1.08,
+          "reference": 1.0800000000065892,
+          "absolute_error": 6.589173651150304e-12,
+          "relative_error": 6.101086713990836e-12,
+          "tolerance": 3.250000000019768e-06,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "cantilever_tip",
+      "label": "Balanço A · ponta livre",
+      "model": {
+        "span_m": 6.0,
+        "elastic_modulus_gpa": 30.0,
+        "width_m": 0.2,
+        "height_m": 0.5,
+        "uniform_load_kn_m": 0,
+        "point_load_kn": 20,
+        "point_position_m": 6,
+        "support_left": "fixed",
+        "support_right": "free"
+      },
+      "elements": 32,
+      "checks": [
+        {
+          "quantity": "left_kn",
+          "analytical": 20.0,
+          "reference": 20.000000000328782,
+          "absolute_error": 3.2878233469091356e-10,
+          "relative_error": 1.6439116734275435e-11,
+          "tolerance": 6.001000000098635e-05,
+          "passed": true
+        },
+        {
+          "quantity": "right_kn",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "left_moment_kn_m",
+          "analytical": 120.0,
+          "reference": 120.00000000204568,
+          "absolute_error": 2.045680957962759e-09,
+          "relative_error": 1.704734131606571e-11,
+          "tolerance": 0.00036001000000613704,
+          "passed": true
+        },
+        {
+          "quantity": "right_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "moment_kn_m",
+          "analytical": 120.0,
+          "reference": 120.00000000204568,
+          "absolute_error": 2.045680957962759e-09,
+          "relative_error": 1.704734131606571e-11,
+          "tolerance": 0.00036001000000613704,
+          "passed": true
+        },
+        {
+          "quantity": "deflection_mm",
+          "analytical": 23.040000000000003,
+          "reference": 23.040000000414274,
+          "absolute_error": 4.1427128394389e-10,
+          "relative_error": 1.7980524476408035e-11,
+          "tolerance": 6.913000000124282e-05,
+          "passed": true
+        },
+        {
+          "quantity": "absolute_shear_kn",
+          "analytical": 20.0,
+          "reference": 20.000000000742148,
+          "absolute_error": 7.421476766467094e-10,
+          "relative_error": 3.710738383095851e-11,
+          "tolerance": 6.0010000002226446e-05,
+          "passed": true
+        },
+        {
+          "quantity": "left_rotation_mrad",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_rotation_mrad",
+          "analytical": 5.760000000000001,
+          "reference": 5.7600000001050145,
+          "absolute_error": 1.0501377545324431e-10,
+          "relative_error": 1.823155823807808e-11,
+          "tolerance": 1.7290000000315044e-05,
+          "passed": true
+        },
+        {
+          "quantity": "max_bending_stress_mpa",
+          "analytical": 14.4,
+          "reference": 14.400000000245482,
+          "absolute_error": 2.454818570640782e-10,
+          "relative_error": 1.7047351184714818e-11,
+          "tolerance": 4.321000000073645e-05,
+          "passed": true
+        },
+        {
+          "quantity": "max_shear_stress_mpa",
+          "analytical": 0.3,
+          "reference": 0.3000000000111322,
+          "absolute_error": 1.1132206267916445e-11,
+          "relative_error": 3.7107354225011195e-11,
+          "tolerance": 9.100000000333966e-07,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "mirrored_cantilever",
+      "label": "Balanço B · distribuída",
+      "model": {
+        "span_m": 6.0,
+        "elastic_modulus_gpa": 30.0,
+        "width_m": 0.2,
+        "height_m": 0.5,
+        "uniform_load_kn_m": 12.0,
+        "point_load_kn": 0.0,
+        "point_position_m": 3.0,
+        "support_left": "free",
+        "support_right": "fixed"
+      },
+      "elements": 32,
+      "checks": [
+        {
+          "quantity": "left_kn",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_kn",
+          "analytical": 72.0,
+          "reference": 72.00000000061664,
+          "absolute_error": 6.166374078020453e-10,
+          "relative_error": 8.564408441621724e-12,
+          "tolerance": 0.0002160100000018499,
+          "passed": true
+        },
+        {
+          "quantity": "left_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_moment_kn_m",
+          "analytical": -216.0,
+          "reference": -216.000000003629,
+          "absolute_error": 3.6289975469117053e-09,
+          "relative_error": 1.6800914568753402e-11,
+          "tolerance": 0.0006480100000108871,
+          "passed": true
+        },
+        {
+          "quantity": "moment_kn_m",
+          "analytical": 216.0,
+          "reference": 216.000000003629,
+          "absolute_error": 3.6289975469117053e-09,
+          "relative_error": 1.6800914568753402e-11,
+          "tolerance": 0.0006480100000108871,
+          "passed": true
+        },
+        {
+          "quantity": "deflection_mm",
+          "analytical": 31.104,
+          "reference": 31.104000000694157,
+          "absolute_error": 6.941576202734723e-10,
+          "relative_error": 2.2317310322080137e-11,
+          "tolerance": 9.332200000208247e-05,
+          "passed": true
+        },
+        {
+          "quantity": "absolute_shear_kn",
+          "analytical": 72.0,
+          "reference": 72.00000000061664,
+          "absolute_error": 6.166374078020453e-10,
+          "relative_error": 8.564408441621724e-12,
+          "tolerance": 0.0002160100000018499,
+          "passed": true
+        },
+        {
+          "quantity": "left_rotation_mrad",
+          "analytical": -6.912,
+          "reference": -6.912000000173376,
+          "absolute_error": 1.7337598023914325e-10,
+          "relative_error": 2.5083330473783912e-11,
+          "tolerance": 2.074600000052013e-05,
+          "passed": true
+        },
+        {
+          "quantity": "right_rotation_mrad",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "max_bending_stress_mpa",
+          "analytical": 25.92,
+          "reference": 25.92000000043548,
+          "absolute_error": 4.354774318926502e-10,
+          "relative_error": 1.6800826847428002e-11,
+          "tolerance": 7.777000000130643e-05,
+          "passed": true
+        },
+        {
+          "quantity": "max_shear_stress_mpa",
+          "analytical": 1.08,
+          "reference": 1.0800000000092496,
+          "absolute_error": 9.249490062757104e-12,
+          "relative_error": 8.564342650627674e-12,
+          "tolerance": 3.2500000000277486e-06,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "mirrored_tip",
+      "label": "Balanço B · ponta livre",
+      "model": {
+        "span_m": 6.0,
+        "elastic_modulus_gpa": 30.0,
+        "width_m": 0.2,
+        "height_m": 0.5,
+        "uniform_load_kn_m": 0,
+        "point_load_kn": 20,
+        "point_position_m": 0,
+        "support_left": "free",
+        "support_right": "fixed"
+      },
+      "elements": 32,
+      "checks": [
+        {
+          "quantity": "left_kn",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_kn",
+          "analytical": 20.0,
+          "reference": 20.000000000458385,
+          "absolute_error": 4.5838532969355583e-10,
+          "relative_error": 2.29192664841525e-11,
+          "tolerance": 6.001000000137516e-05,
+          "passed": true
+        },
+        {
+          "quantity": "left_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_moment_kn_m",
+          "analytical": -120.0,
+          "reference": -120.00000000268813,
+          "absolute_error": 2.688125277927611e-09,
+          "relative_error": 2.2401043982228286e-11,
+          "tolerance": 0.00036001000000806437,
+          "passed": true
+        },
+        {
+          "quantity": "moment_kn_m",
+          "analytical": 120.0,
+          "reference": 120.00000000268818,
+          "absolute_error": 2.688182121346472e-09,
+          "relative_error": 2.2401517677385437e-11,
+          "tolerance": 0.00036001000000806453,
+          "passed": true
+        },
+        {
+          "quantity": "deflection_mm",
+          "analytical": 23.040000000000003,
+          "reference": 23.040000000513814,
+          "absolute_error": 5.138112157965224e-10,
+          "relative_error": 2.2300834018448958e-11,
+          "tolerance": 6.913000000154143e-05,
+          "passed": true
+        },
+        {
+          "quantity": "absolute_shear_kn",
+          "analytical": 20.0,
+          "reference": 20.000000000909495,
+          "absolute_error": 9.094947017729282e-10,
+          "relative_error": 4.547473508657846e-11,
+          "tolerance": 6.0010000002728486e-05,
+          "passed": true
+        },
+        {
+          "quantity": "left_rotation_mrad",
+          "analytical": -5.760000000000001,
+          "reference": -5.760000000128285,
+          "absolute_error": 1.282840500493876e-10,
+          "relative_error": 2.2271536466411542e-11,
+          "tolerance": 1.7290000000384857e-05,
+          "passed": true
+        },
+        {
+          "quantity": "right_rotation_mrad",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "max_bending_stress_mpa",
+          "analytical": 14.4,
+          "reference": 14.400000000322581,
+          "absolute_error": 3.225810729645673e-10,
+          "relative_error": 2.2401463399815348e-11,
+          "tolerance": 4.321000000096775e-05,
+          "passed": true
+        },
+        {
+          "quantity": "max_shear_stress_mpa",
+          "analytical": 0.3,
+          "reference": 0.3000000000136424,
+          "absolute_error": 1.3642420526593924e-11,
+          "relative_error": 4.547473508657846e-11,
+          "tolerance": 9.100000000409272e-07,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "fixed_uniform",
+      "label": "Biengastada · distribuída",
+      "model": {
+        "span_m": 6.0,
+        "elastic_modulus_gpa": 30.0,
+        "width_m": 0.2,
+        "height_m": 0.5,
+        "uniform_load_kn_m": 12.0,
+        "point_load_kn": 0.0,
+        "point_position_m": 3.0,
+        "support_left": "fixed",
+        "support_right": "fixed"
+      },
+      "elements": 32,
+      "checks": [
+        {
+          "quantity": "left_kn",
+          "analytical": 35.99999999999999,
+          "reference": 36.00000000000841,
+          "absolute_error": 8.419931418757187e-12,
+          "relative_error": 2.3388698385431167e-13,
+          "tolerance": 0.00010801000000002524,
+          "passed": true
+        },
+        {
+          "quantity": "right_kn",
+          "analytical": 36.00000000000001,
+          "reference": 35.999999999991815,
+          "absolute_error": 8.192557743313955e-12,
+          "relative_error": 2.275710484254394e-13,
+          "tolerance": 0.00010800999999997545,
+          "passed": true
+        },
+        {
+          "quantity": "left_moment_kn_m",
+          "analytical": 35.999999999999986,
+          "reference": 36.0000000000022,
+          "absolute_error": 2.2168933355715126e-12,
+          "relative_error": 6.158037043253825e-14,
+          "tolerance": 0.0001080100000000066,
+          "passed": true
+        },
+        {
+          "quantity": "right_moment_kn_m",
+          "analytical": -36.0,
+          "reference": -35.99999999998893,
+          "absolute_error": 1.1070255823142361e-11,
+          "relative_error": 3.075071061984935e-13,
+          "tolerance": 0.00010800999999996679,
+          "passed": true
+        },
+        {
+          "quantity": "moment_kn_m",
+          "analytical": 36.0,
+          "reference": 36.0000000000022,
+          "absolute_error": 2.2026824808563106e-12,
+          "relative_error": 6.118562446822711e-14,
+          "tolerance": 0.0001080100000000066,
+          "passed": true
+        },
+        {
+          "quantity": "deflection_mm",
+          "analytical": 0.6479999999999996,
+          "reference": 0.64799999999983,
+          "absolute_error": 1.695310558602614e-13,
+          "relative_error": 2.6162199978442266e-13,
+          "tolerance": 1.95399999999949e-06,
+          "passed": true
+        },
+        {
+          "quantity": "absolute_shear_kn",
+          "analytical": 36.00000000000001,
+          "reference": 36.00000000000841,
+          "absolute_error": 8.405720564041985e-12,
+          "relative_error": 2.334922378900006e-13,
+          "tolerance": 0.00010801000000002524,
+          "passed": true
+        },
+        {
+          "quantity": "left_rotation_mrad",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_rotation_mrad",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "max_bending_stress_mpa",
+          "analytical": 4.32,
+          "reference": 4.320000000000265,
+          "absolute_error": 2.646771690706373e-13,
+          "relative_error": 6.126786321079191e-14,
+          "tolerance": 1.2970000000000796e-05,
+          "passed": true
+        },
+        {
+          "quantity": "max_shear_stress_mpa",
+          "analytical": 0.5400000000000001,
+          "reference": 0.5400000000001262,
+          "absolute_error": 1.2601031329495527e-13,
+          "relative_error": 2.333524320276404e-13,
+          "tolerance": 1.6300000000003785e-06,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "fixed_center",
+      "label": "Biengastada · pontual",
+      "model": {
+        "span_m": 6.0,
+        "elastic_modulus_gpa": 30.0,
+        "width_m": 0.2,
+        "height_m": 0.5,
+        "uniform_load_kn_m": 0,
+        "point_load_kn": 20,
+        "point_position_m": 3.0,
+        "support_left": "fixed",
+        "support_right": "fixed"
+      },
+      "elements": 32,
+      "checks": [
+        {
+          "quantity": "left_kn",
+          "analytical": 9.999999999999998,
+          "reference": 10.000000000003581,
+          "absolute_error": 3.582911745070305e-12,
+          "relative_error": 3.582911745069022e-13,
+          "tolerance": 3.0010000000010746e-05,
+          "passed": true
+        },
+        {
+          "quantity": "right_kn",
+          "analytical": 10.000000000000002,
+          "reference": 9.999999999995566,
+          "absolute_error": 4.4355630279824254e-12,
+          "relative_error": 4.435563027984392e-13,
+          "tolerance": 3.00099999999867e-05,
+          "passed": true
+        },
+        {
+          "quantity": "left_moment_kn_m",
+          "analytical": 14.999999999999996,
+          "reference": 15.000000000000398,
+          "absolute_error": 4.014566457044566e-13,
+          "relative_error": 2.6763776380296397e-14,
+          "tolerance": 4.50100000000012e-05,
+          "passed": true
+        },
+        {
+          "quantity": "right_moment_kn_m",
+          "analytical": -15.0,
+          "reference": -14.999999999993921,
+          "absolute_error": 6.078693104427657e-12,
+          "relative_error": 4.0524620696200803e-13,
+          "tolerance": 4.500999999998177e-05,
+          "passed": true
+        },
+        {
+          "quantity": "moment_kn_m",
+          "analytical": 15.0,
+          "reference": 15.000000000000398,
+          "absolute_error": 3.979039320256561e-13,
+          "relative_error": 2.6526928801709704e-14,
+          "tolerance": 4.50100000000012e-05,
+          "passed": true
+        },
+        {
+          "quantity": "deflection_mm",
+          "analytical": 0.3599999999999999,
+          "reference": 0.3599999999999025,
+          "absolute_error": 9.736655925962623e-14,
+          "relative_error": 2.704626646101461e-13,
+          "tolerance": 1.0899999999997075e-06,
+          "passed": true
+        },
+        {
+          "quantity": "absolute_shear_kn",
+          "analytical": 10.000000000000002,
+          "reference": 10.000000000006253,
+          "absolute_error": 6.250999717849481e-12,
+          "relative_error": 6.250999717845573e-13,
+          "tolerance": 3.001000000001876e-05,
+          "passed": true
+        },
+        {
+          "quantity": "left_rotation_mrad",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_rotation_mrad",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "max_bending_stress_mpa",
+          "analytical": 1.8,
+          "reference": 1.8000000000000478,
+          "absolute_error": 4.773959005888173e-14,
+          "relative_error": 2.6521994477155813e-14,
+          "tolerance": 5.410000000000143e-06,
+          "passed": true
+        },
+        {
+          "quantity": "max_shear_stress_mpa",
+          "analytical": 0.15000000000000002,
+          "reference": 0.15000000000009378,
+          "absolute_error": 9.375833442959447e-14,
+          "relative_error": 6.250555628635724e-13,
+          "tolerance": 4.6000000000028136e-07,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "propped_uniform",
+      "label": "Engaste A e móvel B",
+      "model": {
+        "span_m": 6.0,
+        "elastic_modulus_gpa": 30.0,
+        "width_m": 0.2,
+        "height_m": 0.5,
+        "uniform_load_kn_m": 12.0,
+        "point_load_kn": 0.0,
+        "point_position_m": 3.0,
+        "support_left": "fixed",
+        "support_right": "roller"
+      },
+      "elements": 32,
+      "checks": [
+        {
+          "quantity": "left_kn",
+          "analytical": 44.99999999999999,
+          "reference": 45.00000000000432,
+          "absolute_error": 4.32720526077901e-12,
+          "relative_error": 9.6160116906191e-14,
+          "tolerance": 0.00013501000000001295,
+          "passed": true
+        },
+        {
+          "quantity": "right_kn",
+          "analytical": 27.000000000000007,
+          "reference": 26.999999999992724,
+          "absolute_error": 7.283063041541027e-12,
+          "relative_error": 2.697430756127033e-13,
+          "tolerance": 8.100999999997817e-05,
+          "passed": true
+        },
+        {
+          "quantity": "left_moment_kn_m",
+          "analytical": 53.99999999999994,
+          "reference": 53.999999999985235,
+          "absolute_error": 1.4708234630234074e-11,
+          "relative_error": 2.7237471537477956e-13,
+          "tolerance": 0.0001620099999999557,
+          "passed": true
+        },
+        {
+          "quantity": "right_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "moment_kn_m",
+          "analytical": 53.99999999999994,
+          "reference": 53.999999999985235,
+          "absolute_error": 1.4708234630234074e-11,
+          "relative_error": 2.7237471537477956e-13,
+          "tolerance": 0.0001620099999999557,
+          "passed": true
+        },
+        {
+          "quantity": "deflection_mm",
+          "analytical": 1.3477043714215695,
+          "reference": 1.347703754024503,
+          "absolute_error": 6.173970665823703e-07,
+          "relative_error": 4.5811037087245895e-07,
+          "tolerance": 4.053111262073509e-06,
+          "passed": true
+        },
+        {
+          "quantity": "absolute_shear_kn",
+          "analytical": 44.99999999999999,
+          "reference": 45.00000000000432,
+          "absolute_error": 4.32720526077901e-12,
+          "relative_error": 9.6160116906191e-14,
+          "tolerance": 0.00013501000000001295,
+          "passed": true
+        },
+        {
+          "quantity": "left_rotation_mrad",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_rotation_mrad",
+          "analytical": -0.8640000000000027,
+          "reference": -0.8639999999993848,
+          "absolute_error": 6.178391132038996e-13,
+          "relative_error": 7.150915662087263e-13,
+          "tolerance": 2.6019999999981546e-06,
+          "passed": true
+        },
+        {
+          "quantity": "max_bending_stress_mpa",
+          "analytical": 6.479999999999993,
+          "reference": 6.4799999999982285,
+          "absolute_error": 1.7648105199441488e-12,
+          "relative_error": 2.7234730246059126e-13,
+          "tolerance": 1.944999999999469e-05,
+          "passed": true
+        },
+        {
+          "quantity": "max_shear_stress_mpa",
+          "analytical": 0.6749999999999998,
+          "reference": 0.6750000000000648,
+          "absolute_error": 6.494804694057166e-14,
+          "relative_error": 9.621932880083767e-14,
+          "tolerance": 2.0350000000001944e-06,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "propped_combined",
+      "label": "Engaste A e articulado B",
+      "model": {
+        "span_m": 6.0,
+        "elastic_modulus_gpa": 30.0,
+        "width_m": 0.2,
+        "height_m": 0.5,
+        "uniform_load_kn_m": 12.0,
+        "point_load_kn": 19,
+        "point_position_m": 2,
+        "support_left": "fixed",
+        "support_right": "pinned"
+      },
+      "elements": 33,
+      "checks": [
+        {
+          "quantity": "left_kn",
+          "analytical": 61.18518518518518,
+          "reference": 61.18518518568089,
+          "absolute_error": 4.957101396030339e-10,
+          "relative_error": 8.101800102405254e-12,
+          "tolerance": 0.00018356555555704268,
+          "passed": true
+        },
+        {
+          "quantity": "right_kn",
+          "analytical": 29.814814814814817,
+          "reference": 29.81481481488845,
+          "absolute_error": 7.363354370681918e-11,
+          "relative_error": 2.4696964969928045e-12,
+          "tolerance": 8.945444444466534e-05,
+          "passed": true
+        },
+        {
+          "quantity": "left_moment_kn_m",
+          "analytical": 75.11111111111109,
+          "reference": 75.11111111173858,
+          "absolute_error": 6.274945008044597e-10,
+          "relative_error": 8.354216726616803e-12,
+          "tolerance": 0.00022534333333521574,
+          "passed": true
+        },
+        {
+          "quantity": "right_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "moment_kn_m",
+          "analytical": 75.11111111111109,
+          "reference": 75.11111111173858,
+          "absolute_error": 6.274945008044597e-10,
+          "relative_error": 8.354216726616803e-12,
+          "tolerance": 0.00022534333333521574,
+          "passed": true
+        },
+        {
+          "quantity": "deflection_mm",
+          "analytical": 1.7417499223381947,
+          "reference": 1.7417499194308323,
+          "absolute_error": 2.9073623508679702e-09,
+          "relative_error": 1.669219167708092e-09,
+          "tolerance": 5.235249758292497e-06,
+          "passed": true
+        },
+        {
+          "quantity": "absolute_shear_kn",
+          "analytical": 61.18518518518518,
+          "reference": 61.18518518568089,
+          "absolute_error": 4.957101396030339e-10,
+          "relative_error": 8.101800102405254e-12,
+          "tolerance": 0.00018356555555704268,
+          "passed": true
+        },
+        {
+          "quantity": "left_rotation_mrad",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_rotation_mrad",
+          "analytical": -1.0666666666666673,
+          "reference": -1.0666666666723077,
+          "absolute_error": 5.640377054305645e-12,
+          "relative_error": 5.2878534883835775e-12,
+          "tolerance": 3.210000000016923e-06,
+          "passed": true
+        },
+        {
+          "quantity": "max_bending_stress_mpa",
+          "analytical": 9.01333333333333,
+          "reference": 9.01333333340863,
+          "absolute_error": 7.529976642217662e-11,
+          "relative_error": 8.354264026059272e-12,
+          "tolerance": 2.705000000022589e-05,
+          "passed": true
+        },
+        {
+          "quantity": "max_shear_stress_mpa",
+          "analytical": 0.9177777777777777,
+          "reference": 0.9177777777852134,
+          "absolute_error": 7.435718707426986e-12,
+          "relative_error": 8.101872683571513e-12,
+          "tolerance": 2.7633333333556403e-06,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "mirrored_propped",
+      "label": "Móvel A e engaste B",
+      "model": {
+        "span_m": 6.0,
+        "elastic_modulus_gpa": 30.0,
+        "width_m": 0.2,
+        "height_m": 0.5,
+        "uniform_load_kn_m": 12.0,
+        "point_load_kn": 0.0,
+        "point_position_m": 3.0,
+        "support_left": "roller",
+        "support_right": "fixed"
+      },
+      "elements": 32,
+      "checks": [
+        {
+          "quantity": "left_kn",
+          "analytical": 27.0,
+          "reference": 26.999999999992724,
+          "absolute_error": 7.275957614183426e-12,
+          "relative_error": 2.694799116364958e-13,
+          "tolerance": 8.100999999997817e-05,
+          "passed": true
+        },
+        {
+          "quantity": "right_kn",
+          "analytical": 45.0,
+          "reference": 44.999999999998636,
+          "absolute_error": 1.3642420526593924e-12,
+          "relative_error": 3.031649005909853e-14,
+          "tolerance": 0.0001350099999999959,
+          "passed": true
+        },
+        {
+          "quantity": "left_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_moment_kn_m",
+          "analytical": -54.0,
+          "reference": -53.999999999985775,
+          "absolute_error": 1.4225065569917206e-11,
+          "relative_error": 2.6342714018372134e-13,
+          "tolerance": 0.0001620099999999573,
+          "passed": true
+        },
+        {
+          "quantity": "moment_kn_m",
+          "analytical": 54.0,
+          "reference": 53.99999999998579,
+          "absolute_error": 1.4210854715202004e-11,
+          "relative_error": 2.631639762075138e-13,
+          "tolerance": 0.00016200999999995737,
+          "passed": true
+        },
+        {
+          "quantity": "deflection_mm",
+          "analytical": 1.3477043714215737,
+          "reference": 1.3477037540247176,
+          "absolute_error": 6.173968560840848e-07,
+          "relative_error": 4.581102146820624e-07,
+          "tolerance": 4.053111262074153e-06,
+          "passed": true
+        },
+        {
+          "quantity": "absolute_shear_kn",
+          "analytical": 45.0,
+          "reference": 44.999999999998636,
+          "absolute_error": 1.3642420526593924e-12,
+          "relative_error": 3.031649005909853e-14,
+          "tolerance": 0.0001350099999999959,
+          "passed": true
+        },
+        {
+          "quantity": "left_rotation_mrad",
+          "analytical": 0.8639999999999998,
+          "reference": 0.8639999999994772,
+          "absolute_error": 5.225819776910612e-13,
+          "relative_error": 6.048402519576127e-13,
+          "tolerance": 2.6019999999984315e-06,
+          "passed": true
+        },
+        {
+          "quantity": "right_rotation_mrad",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "max_bending_stress_mpa",
+          "analytical": 6.48,
+          "reference": 6.479999999998295,
+          "absolute_error": 1.7053025658242404e-12,
+          "relative_error": 2.6316397620751374e-13,
+          "tolerance": 1.944999999999489e-05,
+          "passed": true
+        },
+        {
+          "quantity": "max_shear_stress_mpa",
+          "analytical": 0.675,
+          "reference": 0.6749999999999795,
+          "absolute_error": 2.0539125955565396e-14,
+          "relative_error": 3.0428334748986693e-14,
+          "tolerance": 2.0349999999999386e-06,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "swapped_simple",
+      "label": "Móvel A e articulado B",
+      "model": {
+        "span_m": 6.0,
+        "elastic_modulus_gpa": 30.0,
+        "width_m": 0.2,
+        "height_m": 0.5,
+        "uniform_load_kn_m": 12.0,
+        "point_load_kn": 0.0,
+        "point_position_m": 3.0,
+        "support_left": "roller",
+        "support_right": "pinned"
+      },
+      "elements": 32,
+      "checks": [
+        {
+          "quantity": "left_kn",
+          "analytical": 36.0,
+          "reference": 35.99999999998545,
+          "absolute_error": 1.4551915228366852e-11,
+          "relative_error": 4.042198674547982e-13,
+          "tolerance": 0.00010800999999995634,
+          "passed": true
+        },
+        {
+          "quantity": "right_kn",
+          "analytical": 36.0,
+          "reference": 36.00000000003274,
+          "absolute_error": 3.2741809263825417e-11,
+          "relative_error": 9.094947017721011e-13,
+          "tolerance": 0.00010801000000009822,
+          "passed": true
+        },
+        {
+          "quantity": "left_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "moment_kn_m",
+          "analytical": 54.0,
+          "reference": 53.99999999997306,
+          "absolute_error": 2.6936675112665398e-11,
+          "relative_error": 4.988273169014599e-13,
+          "tolerance": 0.0001620099999999192,
+          "passed": true
+        },
+        {
+          "quantity": "deflection_mm",
+          "analytical": 3.2399999999999998,
+          "reference": 3.239999999998475,
+          "absolute_error": 1.524558257415265e-12,
+          "relative_error": 4.705426720419699e-13,
+          "tolerance": 9.729999999995426e-06,
+          "passed": true
+        },
+        {
+          "quantity": "absolute_shear_kn",
+          "analytical": 36.0,
+          "reference": 36.00000000003274,
+          "absolute_error": 3.2741809263825417e-11,
+          "relative_error": 9.094947017721011e-13,
+          "tolerance": 0.00010801000000009822,
+          "passed": true
+        },
+        {
+          "quantity": "left_rotation_mrad",
+          "analytical": 1.728,
+          "reference": 1.727999999998858,
+          "absolute_error": 1.141975403129436e-12,
+          "relative_error": 6.608653953299715e-13,
+          "tolerance": 5.193999999996574e-06,
+          "passed": true
+        },
+        {
+          "quantity": "right_rotation_mrad",
+          "analytical": -1.728,
+          "reference": -1.7279999999997635,
+          "absolute_error": 2.3647750424515834e-13,
+          "relative_error": 1.3685040754930018e-13,
+          "tolerance": 5.193999999999291e-06,
+          "passed": true
+        },
+        {
+          "quantity": "max_bending_stress_mpa",
+          "analytical": 6.48,
+          "reference": 6.4799999999967675,
+          "absolute_error": 3.232969447708456e-12,
+          "relative_error": 4.989150382268625e-13,
+          "tolerance": 1.9449999999990305e-05,
+          "passed": true
+        },
+        {
+          "quantity": "max_shear_stress_mpa",
+          "analytical": 0.54,
+          "reference": 0.5400000000004911,
+          "absolute_error": 4.910516437917067e-13,
+          "relative_error": 9.093548959097411e-13,
+          "tolerance": 1.6300000000014733e-06,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "two_pinned",
+      "label": "Dois articulados · flexão",
+      "model": {
+        "span_m": 6.0,
+        "elastic_modulus_gpa": 30.0,
+        "width_m": 0.2,
+        "height_m": 0.5,
+        "uniform_load_kn_m": 12.0,
+        "point_load_kn": 0.0,
+        "point_position_m": 3.0,
+        "support_left": "pinned",
+        "support_right": "pinned"
+      },
+      "elements": 32,
+      "checks": [
+        {
+          "quantity": "left_kn",
+          "analytical": 36.0,
+          "reference": 35.99999999998545,
+          "absolute_error": 1.4551915228366852e-11,
+          "relative_error": 4.042198674547982e-13,
+          "tolerance": 0.00010800999999995634,
+          "passed": true
+        },
+        {
+          "quantity": "right_kn",
+          "analytical": 36.0,
+          "reference": 36.00000000003274,
+          "absolute_error": 3.2741809263825417e-11,
+          "relative_error": 9.094947017721011e-13,
+          "tolerance": 0.00010801000000009822,
+          "passed": true
+        },
+        {
+          "quantity": "left_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "right_moment_kn_m",
+          "analytical": 0.0,
+          "reference": 0.0,
+          "absolute_error": 0.0,
+          "relative_error": null,
+          "tolerance": 1e-08,
+          "passed": true
+        },
+        {
+          "quantity": "moment_kn_m",
+          "analytical": 54.0,
+          "reference": 53.99999999997306,
+          "absolute_error": 2.6936675112665398e-11,
+          "relative_error": 4.988273169014599e-13,
+          "tolerance": 0.0001620099999999192,
+          "passed": true
+        },
+        {
+          "quantity": "deflection_mm",
+          "analytical": 3.2399999999999998,
+          "reference": 3.239999999998475,
+          "absolute_error": 1.524558257415265e-12,
+          "relative_error": 4.705426720419699e-13,
+          "tolerance": 9.729999999995426e-06,
+          "passed": true
+        },
+        {
+          "quantity": "absolute_shear_kn",
+          "analytical": 36.0,
+          "reference": 36.00000000003274,
+          "absolute_error": 3.2741809263825417e-11,
+          "relative_error": 9.094947017721011e-13,
+          "tolerance": 0.00010801000000009822,
+          "passed": true
+        },
+        {
+          "quantity": "left_rotation_mrad",
+          "analytical": 1.728,
+          "reference": 1.727999999998858,
+          "absolute_error": 1.141975403129436e-12,
+          "relative_error": 6.608653953299715e-13,
+          "tolerance": 5.193999999996574e-06,
+          "passed": true
+        },
+        {
+          "quantity": "right_rotation_mrad",
+          "analytical": -1.728,
+          "reference": -1.7279999999997635,
+          "absolute_error": 2.3647750424515834e-13,
+          "relative_error": 1.3685040754930018e-13,
+          "tolerance": 5.193999999999291e-06,
+          "passed": true
+        },
+        {
+          "quantity": "max_bending_stress_mpa",
+          "analytical": 6.48,
+          "reference": 6.4799999999967675,
+          "absolute_error": 3.232969447708456e-12,
+          "relative_error": 4.989150382268625e-13,
+          "tolerance": 1.9449999999990305e-05,
+          "passed": true
+        },
+        {
+          "quantity": "max_shear_stress_mpa",
+          "analytical": 0.54,
+          "reference": 0.5400000000004911,
+          "absolute_error": 4.910516437917067e-13,
+          "relative_error": 9.093548959097411e-13,
+          "tolerance": 1.6300000000014733e-06,
+          "passed": true
+        }
+      ],
+      "passed": true
     }
   ],
-  "passed_cases": 10,
-  "total_cases": 10,
-  "passed_checks": 90,
-  "total_checks": 90,
+  "passed_cases": 21,
+  "total_cases": 21,
+  "passed_checks": 231,
+  "total_checks": 231,
   "passed": true
 }

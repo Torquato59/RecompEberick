@@ -103,7 +103,7 @@ class AnalyticalCases(unittest.TestCase):
 
     def test_zero_load_has_no_response(self):
         result = beam(uniform_load_kn_m=0).result()
-        self.assertEqual(result["reactions"], {"left_kn": 0, "right_kn": 0})
+        self.assertEqual(result["reactions"], {"left_kn": 0, "right_kn": 0, "left_moment_kn_m": 0, "right_moment_kn_m": 0})
         for sample in result["samples"]:
             self.assertEqual(sample["shear_kn"], 0)
             self.assertEqual(sample["moment_kn_m"], 0)

@@ -1,5 +1,6 @@
 import { BeamView3D } from './beam3d.js';
-import type { BeamInput, Result, ValidationReport } from './types.js';
+import { SUPPORT_CONDITIONS, SUPPORT_LABELS } from './supports.js';
+import type { BeamInput, Result, SupportType, ValidationReport } from './types.js';
 type ChartKey = 'shear_kn' | 'moment_kn_m' | 'deflection_mm';
 
 function get<T extends Element>(selector: string): T {
@@ -24,7 +25,7 @@ let dirty = true;
 let view3D: BeamView3D | null = null;
 let sceneUnavailable = false;
 let validationReport: ValidationReport | null = null;
-const example: BeamInput = { span_m: 6, elastic_modulus_gpa: 30, width_m: 0.2, height_m: 0.5, uniform_load_kn_m: 12, point_load_kn: 0, point_position_m: 3 };
+const example: BeamInput = { span_m: 6, elastic_modulus_gpa: 30, width_m: 0.2, height_m: 0.5, uniform_load_kn_m: 12, point_load_kn: 0, point_position_m: 3, support_left: 'pinned', support_right: 'roller' };
 
 function fmt(value: number, digits = 2): string {
   return new Intl.NumberFormat('pt-BR', { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(Math.abs(value) < 1e-10 ? 0 : value);
@@ -47,13 +48,18 @@ function readModel(): BeamInput {
     uniform_load_kn_m: input('uniform_load_kn_m').valueAsNumber,
     point_load_kn: input('point_load_kn').valueAsNumber,
     point_position_m: input('point_position_m').valueAsNumber,
+    support_left: get<HTMLSelectElement>('#support-left').value as SupportType,
+    support_right: get<HTMLSelectElement>('#support-right').value as SupportType,
   };
 }
 function writeModel(model: BeamInput): void {
   for (const [key, value] of Object.entries(model)) {
+    if (typeof value !== 'number') continue;
     const name = key === 'width_m' ? 'width_cm' : key === 'height_m' ? 'height_cm' : key;
     input(name).value = String(key === 'width_m' || key === 'height_m' ? value * 100 : value);
   }
+  get<HTMLSelectElement>('#support-left').value = model.support_left ?? 'pinned';
+  get<HTMLSelectElement>('#support-right').value = model.support_right ?? 'roller';
   updatePointLimit();
 }
 function updatePointLimit(): void {
@@ -93,15 +99,26 @@ function drawBeam(model: BeamInput): void {
   const start = 92, end = 808, beamY = 118;
   const textScale = svg.clientWidth < 500 ? 1.5 : 1;
   const xAt = (x: number): number => start + (end - start) * x / model.span_m;
-  // Linha de base, seção e apoios A (articulação) e B (rolete).
+  const left = model.support_left ?? 'pinned', right = model.support_right ?? 'roller';
+  svg.dataset.supportLeft = left;
+  svg.dataset.supportRight = right;
+  // Os símbolos usam as mesmas condições de apoio enviadas ao cálculo.
   svg.append(svgElement('rect', { x: start, y: beamY, width: end - start, height: 9, rx: 1, fill: '#294a55' }));
-  for (const [x, name] of [[start, 'A'], [end, 'B']] as const) {
-    svg.append(svgElement('path', { d: `M${x},128 l-12,21 h24 Z`, fill: '#e7eeed', stroke: '#5d777d', 'stroke-width': 1.3 }));
-    if (name === 'B') {
-      for (const dx of [-6, 6]) svg.append(svgElement('circle', { cx: x + dx, cy: 153, r: 3, fill: '#fff', stroke: '#6e878b' }));
+  for (const [x, name, support] of [[start, 'A', left], [end, 'B', right]] as const) {
+    if (support === 'fixed') {
+      const wall = name === 'A' ? x - 13 : x;
+      svg.append(svgElement('rect', { x: wall, y: 92, width: 13, height: 68, fill: '#bbcaca', stroke: '#6d8586' }));
+      for (let y = 94; y < 155; y += 10) svg.append(svgElement('path', { d: `M${wall},${y + 8}l13,-8`, stroke: '#829999', 'stroke-width': 0.8 }));
+    } else if (support !== 'free') {
+      svg.append(svgElement('path', { d: `M${x},128 l-12,21 h24 Z`, fill: '#e7eeed', stroke: '#5d777d', 'stroke-width': 1.3 }));
+      if (support === 'roller') {
+        for (const dx of [-6, 6]) svg.append(svgElement('circle', { cx: x + dx, cy: 153, r: 3, fill: '#fff', stroke: '#6e878b' }));
+      }
+      const groundY = support === 'roller' ? 159 : 153;
+      svg.append(svgElement('path', { d: `M${x - 22},${groundY}h44`, stroke: '#9aadb1', 'stroke-width': 1 }));
+    } else {
+      svg.append(svgElement('circle', { cx: x, cy: beamY + 4.5, r: 5, fill: '#fff', stroke: '#7c9697', 'stroke-width': 1.5 }));
     }
-    const groundY = name === 'B' ? 159 : 153;
-    svg.append(svgElement('path', { d: `M${x - 22},${groundY}h44`, stroke: '#9aadb1', 'stroke-width': 1 }));
     svg.append(svgElement('text', { x, y: 177, 'text-anchor': 'middle', fill: '#48676c', 'font-size': 12 * textScale, 'font-weight': 600 }, name));
   }
   const arrow = (x: number, top: number, bottom: number, color: string): void => {
@@ -178,7 +195,7 @@ function drawChart(id: string, result: Result, model: BeamInput, key: ChartKey, 
     cursorDot.setAttribute('cx', String(xAt(nearest.x_m)));
     cursorDot.setAttribute('cy', String(yAt(nearest[key])));
     focus.setAttribute('visibility', 'visible');
-    const discontinuity = key === 'shear_kn' && nearest.x_m === model.point_position_m && model.point_load_kn > 0 ? ' · após P' : '';
+    const discontinuity = key === 'shear_kn' && nearest.x_m === model.point_position_m && model.point_load_kn > 0 ? nearest.side === 'left' ? ' · antes de P' : ' · após P' : '';
     reading.textContent = `x = ${fmt(nearest.x_m)} m · ${compact(nearest[key])} ${unit}${discontinuity}`;
   };
   svg.onpointerleave = () => {
@@ -197,6 +214,8 @@ function metric(selector: string, value: number, unit: string): void {
 }
 function render(model: BeamInput, result: Result): void {
   drawBeam(model);
+  get('#beam-type').textContent = result.beam_type;
+  get('#supports-summary').textContent = `A: ${SUPPORT_LABELS[result.supports.left]} · B: ${SUPPORT_LABELS[result.supports.right]}`;
   if (!sceneUnavailable) {
     try {
       view3D ??= new BeamView3D(get('#beam-3d'), get('#scene-status'));
@@ -213,8 +232,12 @@ function render(model: BeamInput, result: Result): void {
   metric('#reaction-b', result.reactions.right_kn, 'kN');
   metric('#max-moment', result.extrema.moment_kn_m, 'kN·m');
   metric('#max-deflection', result.extrema.deflection_mm, 'mm');
-  get('#moment-location').textContent = `em x = ${fmt(result.extrema.moment_position_m)} m`;
-  get('#deflection-location').textContent = `em x = ${fmt(result.extrema.deflection_position_m)} m · para baixo`;
+  get('#moment-location').textContent = `M = ${compact(result.extrema.signed_moment_kn_m)} kN·m em x = ${fmt(result.extrema.moment_position_m)} m`;
+  get('#deflection-location').textContent = `em x = ${fmt(result.extrema.deflection_position_m)} m · ${result.extrema.signed_deflection_mm >= 0 ? 'para baixo' : 'para cima'}`;
+  get('#reaction-moment-a').textContent = `${compact(result.reactions.left_moment_kn_m)} kN·m`;
+  get('#reaction-moment-b').textContent = `${compact(result.reactions.right_moment_kn_m)} kN·m`;
+  get('#positive-moment').textContent = `${compact(result.extrema.positive_moment_kn_m)} kN·m`;
+  get('#negative-moment').textContent = `${compact(result.extrema.negative_moment_kn_m)} kN·m`;
   get('#section-inertia').textContent = `I = ${result.inertia_m4.toExponential(3).replace('.', ',')} m⁴`;
   const properties = get('#model-properties');
   properties.textContent = `Seção ${fmt(model.width_m * 100, 1)} × ${fmt(model.height_m * 100, 1)} cm · E = ${compact(model.elastic_modulus_gpa)} GPa · I = ${result.inertia_m4.toExponential(3).replace('.', ',')} m⁴`;
@@ -231,13 +254,19 @@ function render(model: BeamInput, result: Result): void {
   get('#section-modulus').textContent = `${compact(result.section.section_modulus_m3 * 1e6)} cm³`;
   get('#flexural-rigidity').textContent = `${compact(result.flexural_rigidity_kn_m2)} kN·m²`;
   get('#calculation-memory').textContent = [
+    `A: ${SUPPORT_LABELS[result.supports.left]} (${SUPPORT_CONDITIONS[result.supports.left]})`,
+    `B: ${SUPPORT_LABELS[result.supports.right]} (${SUPPORT_CONDITIONS[result.supports.right]})`,
     `A = b × h = ${result.section.area_m2.toExponential(6)} m²`,
     `I = b × h³ / 12 = ${result.inertia_m4.toExponential(6)} m⁴`,
     `W = I / (h/2) = ${result.section.section_modulus_m3.toExponential(6)} m³`,
     `EI = E × 10⁶ × I = ${compact(result.flexural_rigidity_kn_m2)} kN·m²`,
-    `RA = qL/2 + P(L−a)/L = ${compact(result.reactions.left_kn)} kN`,
-    `RB = qL/2 + Pa/L = ${compact(result.reactions.right_kn)} kN`,
-    `σmáx = Mmáx / W / 1000 = ${compact(elastic.max_bending_stress_mpa)} MPa`,
+    `M(x) = M0 + RA·x − q·x²/2 − P·max(x−a,0)`,
+    `EI·δ(x) = D + C·x − M0·x²/2 − RA·x³/6 + q·x⁴/24 + P·max(x−a,0)³/6`,
+    `M0 = ${compact(result.integration_constants.initial_moment_kn_m)} kN·m`,
+    `C = ${result.integration_constants.c_kn_m2.toExponential(6)} kN·m²; D = ${result.integration_constants.d_kn_m3.toExponential(6)} kN·m³`,
+    `RA = ${compact(result.reactions.left_kn)} kN; RB = ${compact(result.reactions.right_kn)} kN`,
+    `MA = ${compact(result.reactions.left_moment_kn_m)} kN·m; MB = ${compact(result.reactions.right_moment_kn_m)} kN·m (reações externas anti-horárias positivas)`,
+    `σmáx = |M|máx / W / 1000 = ${compact(elastic.max_bending_stress_mpa)} MPa`,
     `τmáx = 1,5 × |Vmáx| / A / 1000 = ${compact(elastic.max_shear_stress_mpa)} MPa`,
     `θA = δ′(0) = ${fmt(elastic.left_rotation_mrad, 3)} mrad`,
     `θB = δ′(L) = ${fmt(elastic.right_rotation_mrad, 3)} mrad`,
@@ -261,6 +290,13 @@ async function runCalculation(model: BeamInput, replaceForm = false): Promise<vo
   updateButtons();
   message('Calculando reações, esforços e deslocamentos…');
   try {
+    const left = model.support_left ?? 'pinned', right = model.support_right ?? 'roller';
+    if (left !== 'fixed' && right !== 'fixed' && (left === 'free' || right === 'free')) {
+      throw new Error('Combinação instável: uma extremidade livre exige um engaste na outra extremidade.');
+    }
+    if (left === 'roller' && right === 'roller') {
+      throw new Error('Combinação instável: dois apoios móveis não restringem a translação horizontal.');
+    }
     const response = await fetch('/api/calculate', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(model),
       signal: AbortSignal.timeout(15_000),
@@ -304,7 +340,7 @@ get('#reset-example').addEventListener('click', () => {
 });
 exportButton.addEventListener('click', () => {
   if (dirty || !lastModel) return;
-  const project = { format: 'estrutura-beam', version: 1, units: 'm-kN-GPa', model: lastModel };
+  const project = { format: 'estrutura-beam', version: 2, units: 'm-kN-GPa', model: { ...lastModel, support_left: lastModel.support_left ?? 'pinned', support_right: lastModel.support_right ?? 'roller' } };
   const blob = new Blob([JSON.stringify(project, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const anchor = document.createElement('a');
@@ -322,8 +358,15 @@ fileInput.addEventListener('change', async () => {
     const project: unknown = JSON.parse(await file.text());
     if (typeof project !== 'object' || project === null) throw new Error('Arquivo de projeto inválido.');
     const data = project as Record<string, unknown>;
-    if (data.format !== 'estrutura-beam' || data.version !== 1 || data.units !== 'm-kN-GPa' || typeof data.model !== 'object' || data.model === null) {
-      throw new Error('Use um projeto Estrutura versão 1, com unidades m-kN-GPa.');
+    if (data.format !== 'estrutura-beam' || (data.version !== 1 && data.version !== 2) || data.units !== 'm-kN-GPa' || typeof data.model !== 'object' || data.model === null) {
+      throw new Error('Use um projeto Estrutura versão 1 ou 2, com unidades m-kN-GPa.');
+    }
+    const model = data.model as Record<string, unknown>;
+    if (data.version === 2 && (typeof model.support_left !== 'string' || typeof model.support_right !== 'string')) {
+      throw new Error('Projetos versão 2 devem informar os apoios A e B.');
+    }
+    if (data.version === 1 && ('support_left' in model || 'support_right' in model)) {
+      throw new Error('Projetos com escolha de apoios devem usar o formato versão 2.');
     }
     await runCalculation(data.model as BeamInput, true);
   } catch (error) {
@@ -352,7 +395,7 @@ async function loadValidation(): Promise<void> {
     tbody.replaceChildren();
     for (const test of validationReport.cases) {
       const row = document.createElement('tr');
-      const values = [test.label, ...['left_kn', 'right_kn', 'moment_kn_m', 'deflection_mm'].map(quantity => compact(test.checks.find(check => check.quantity === quantity)!.analytical)), test.passed ? 'Conferido' : 'Divergência'];
+      const values = [test.label, ...['left_kn', 'right_kn', 'left_moment_kn_m', 'right_moment_kn_m', 'moment_kn_m', 'deflection_mm'].map(quantity => compact(test.checks.find(check => check.quantity === quantity)!.analytical)), test.passed ? 'Conferido' : 'Divergência'];
       for (const value of values) { const cell = document.createElement('td'); cell.textContent = value; row.append(cell); }
       row.lastElementChild!.classList.add(test.passed ? 'check-passed' : 'check-failed');
       const action = document.createElement('td');

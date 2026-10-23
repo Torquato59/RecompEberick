@@ -1,12 +1,14 @@
 # Estrutura · Laboratório de vigas
 
-**Escopo atual: manter a versão 0.2 com foco de uso no Windows. Desenvolvimento e testes específicos para celular estão pausados.** A interface, os cálculos e a arquitetura desta versão foram mantidos. As imagens de celular já publicadas são registros históricos; o layout adaptável existente não exige um aplicativo ou serviço móvel separado.
+**Linha 0.2 · atualização 0.2.1: apoios selecionáveis, com foco de uso no Windows. Desenvolvimento e testes específicos para celular permanecem pausados.** As imagens móveis já publicadas são registros históricos. Esta atualização amplia as condições de apoio, preservando a arquitetura do protótipo.
+
+[Escolha de apoios, exemplos e imagens](docs/apoios/README.md)
 
 [Imagens e PDF do primeiro protótipo](docs/prototipo/README.md)
 
 [Versão 0.2: modelo 3D e relatórios](docs/prototipo-3d/README.md) · [Conferência independente dos cálculos](docs/validacao/README.md)
 
-Primeiro módulo do projeto RecompEberick: um aplicativo independente para explorar o comportamento de uma viga biapoiada. Núcleo de cálculo em Python, interface em TypeScript, SVG e Three.js. Não usa código, bibliotecas ou executáveis extraídos do instalador AltoQi. REA permanece como ferramenta separada de análise.
+Primeiro módulo do projeto RecompEberick: um aplicativo independente para explorar vigas com apoios ideais selecionáveis. Núcleo de cálculo em Python, interface em TypeScript, SVG e Three.js. Não usa código, bibliotecas ou executáveis extraídos do instalador AltoQi. REA permanece como ferramenta separada de análise.
 
 ## Executar
 
@@ -28,27 +30,42 @@ Teste opcional de interface: com Playwright (`requirements-browser.txt`), Chromi
 
 ## Usar o protótipo
 
-1. Informe o vão, a seção retangular e o módulo de elasticidade.
+1. Informe o comprimento, a seção retangular, o módulo de elasticidade e os apoios de cada extremidade.
 2. Defina a carga distribuída em todo o vão e/ou uma carga pontual. A posição é medida a partir de A. Use zero para remover uma carga.
 3. Selecione **Calcular estrutura**. Os diagramas mostram valores amostrados ao passar o cursor. As máximas de momento e flecha são obtidas independentemente da malha de desenho.
 4. **Salvar projeto** exporta os dados em JSON; **Abrir projeto** valida e recalcula o arquivo. O exemplo está em `examples/viga-distribuida.json`.
 5. **Imprimir relatório** usa a impressão do navegador, com layout próprio para papel/PDF. Mudanças nos dados invalidam os resultados anteriores até um novo cálculo.
 6. Na vista 3D, arraste para girar e use a roda ou os botões para aproximar. Com foco no modelo, as setas giram, +/− alteram o zoom e Home restaura a câmera. **Exibir deformada** usa a flecha já calculada; o fator visual aparece abaixo. A seção e o vão permanecem nas proporções reais na vista inicial; cargas e apoios são esquemáticos. Trata-se da representação espacial do modelo de viga 1D, sem cálculo de sólidos 3D.
 7. Em **Tensões e rotações elásticas**, confira área, módulo resistente, EI, tensões da seção bruta e rotações. A memória mostra fórmulas e valores. Não há comparação de tensão com resistência, verificação de fissuração ou armaduras.
-8. Em **Casos de referência**, carregue um dos dez cenários ou baixe a conferência completa. O arquivo de projeto permanece compatível com a versão 1: nenhum novo parâmetro de entrada foi introduzido.
+8. Em **Casos de referência**, carregue um dos 21 cenários ou baixe a conferência completa. O aplicativo abre os projetos antigos de versão 1 como articulado em A e móvel em B. Novos arquivos usam formato versão 2 e gravam explicitamente os dois apoios.
+
+## Tipos de apoio
+
+Cada extremidade aceita `pinned` (articulado), `roller` (móvel), `fixed` (engastado) ou `free` (livre). A interface apresenta os nomes em português e atualiza os símbolos 2D e 3D após calcular.
+
+| Apoio | Condições na flexão vertical |
+| --- | --- |
+| Articulado | Deslocamento vertical e momento interno nulos |
+| Móvel | Deslocamento vertical e momento interno nulos |
+| Engastado | Deslocamento vertical e rotação nulos |
+| Livre | Momento e reações externas de apoio nulos; cargas na ponta continuam atuando |
+
+Uma ponta livre exige engaste na outra ponta. Dois móveis são bloqueados por ausência de restrição horizontal. As dez combinações aceitas abrangem vigas biapoiadas, balanços em A ou B, biengastadas e engastadas com apoio na outra extremidade. Dois articulados são resolvidos apenas quanto à flexão vertical, assim como os demais casos: não são calculados esforço axial, torção ou reações horizontais.
+
+As reações MA e MB são momentos externos, positivos anti-horários. O momento interno M(x) é positivo sagente. A tela mostra seus extremos positivo/negativo e o máximo absoluto usado em `σ = |M|/W`; o momento negativo do engaste é incluído. As reações de momento integram a verificação de equilíbrio.
 
 ## Conferência independente
 
 `npm run validate` executa a comparação e grava JSON, CSV e relatório em `artifacts/validation/`. Para atualizar os resultados publicados: `python3 scripts/validate_calculations.py --output docs/validacao`.
 
-A referência em `verification/fem.py` não importa o núcleo analítico. Monta elementos de Euler–Bernoulli, dois graus de liberdade por nó, carregamento distribuído consistente e carga pontual aplicada exatamente em um nó; resolve a rigidez por Cholesky e interpola deslocamentos por Hermite. A malha regular é ajustada perto da carga para evitar elementos quase nulos. São 32 ou 33 elementos nos dez casos publicados.
+A referência em `verification/fem.py` não importa o núcleo analítico. Monta elementos de Euler–Bernoulli, dois graus de liberdade por nó, carregamento distribuído consistente e carga pontual aplicada exatamente em um nó; restringe translações e rotações de acordo com os apoios, resolve a rigidez por Cholesky e interpola deslocamentos por Hermite. A malha regular é ajustada perto da carga para evitar elementos quase nulos. São 32 ou 33 elementos nos 21 casos publicados.
 
-São comparadas nove grandezas por caso: RA, RB, momento, flecha, cortante, rotações em A e B e tensões de flexão e cisalhamento. Critério por grandeza: erro absoluto ≤ `1e-8 + 3e-6 × |referência|`, nas unidades da saída. Há 26 testes, incluindo soluções fechadas, refinamento da referência, simetria, superposição, unidades e 24 casos gerados com semente fixa para comparar reações, momentos e deslocamentos ao longo do vão. A concordância entre métodos verifica a implementação deste modelo linear, não as hipóteses físicas ou o dimensionamento normativo.
+São comparadas onze grandezas por caso: RA, RB, MA, MB, máximos absolutos de momento e flecha, cortante, rotações em A e B e tensões de flexão e cisalhamento. Critério por grandeza: erro absoluto ≤ `1e-8 + 3e-6 × |referência|`, nas unidades da saída. Há 39 testes, incluindo fórmulas fechadas de diferentes vinculações, refinamento da referência, estabilidade, simetria, superposição, unidades, API e condições de contorno. Incluem 24 casos gerados para vigas biapoiadas e outros 30 casos gerados cobrindo as dez combinações de apoios. A concordância entre métodos verifica este modelo linear, não as hipóteses físicas ou o dimensionamento normativo.
 
 ## Modelo e unidades
 
 - Euler–Bernoulli, seção retangular constante, material homogêneo, EI constante e pequenos deslocamentos.
-- A articulado e B móvel. Carga uniformemente distribuída em todo o vão e uma carga pontual, ambas positivas para baixo.
+- Apoios ideais selecionáveis. Por padrão, A articulado e B móvel. Carga uniformemente distribuída em todo o comprimento e uma carga pontual, ambas positivas para baixo.
 - Não inclui automaticamente o peso próprio: acrescente sua parcela à carga distribuída quando necessário.
 - Interface: vão/posição em m, seção em cm, E em GPa, cargas em kN e kN/m. API/arquivo: seção em m; saídas em kN, kN·m e mm.
 - Momento positivo sagente e flecha positiva para baixo. Cortante obtido por `V(x) = RA − qx − P·H(x−a)`; na carga pontual são preservados os dois lados do salto. Valores nos apoios representam o limite interno do vão.
@@ -58,16 +75,16 @@ Com `L` em m, `b` e `h` em m e `E` convertido de GPa para kN/m²:
 
 ```text
 I = b h³ / 12                 EI = (E_GPa × 10⁶) I
-RA = qL/2 + P(L−a)/L         RB = qL/2 + Pa/L
-M(x) = RA x − qx²/2 − P〈x−a〉
-δ(x) = [C x − RA x³/6 + qx⁴/24 + P〈x−a〉³/6] / EI
-C = [RA L³/6 − qL⁴/24 − P(L−a)³/6] / L
-θ(x) = [C − RA x²/2 + qx³/6 + P〈x−a〉²/2] / EI
+M(x) = M0 + RA x − qx²/2 − P〈x−a〉
+δ(x) = [D + Cx − M0 x²/2 − RA x³/6 + qx⁴/24 + P〈x−a〉³/6] / EI
+θ(x) = [C − M0 x − RA x²/2 + qx³/6 + P〈x−a〉²/2] / EI
+RB = qL + P − RA
+MA = −M0 (engaste A)          MB = M(L) (engaste B)
 A = bh                       W = I/(h/2)
 σmáx (MPa) = Mmáx/W/1000      τmáx (MPa) = 1,5|Vmáx|/A/1000
 ```
 
-`〈z〉 = max(z, 0)`. A constante C impõe deslocamento nulo em B; em A a condição é satisfeita diretamente. Os extremos de momento são avaliados nos apoios, na carga pontual e nas raízes válidas de V. A máxima flecha é encontrada na raiz de δ′ por bisseção, aproveitando a monotonicidade para as cargas não negativas admitidas.
+`〈z〉 = max(z, 0)`. As quatro incógnitas M0, RA, C e D são determinadas pelas quatro condições de contorno escolhidas. A solução usa x/L para manter a matriz bem escalada. Extremos de momento são avaliados nas extremidades, na carga pontual e nas raízes de V. Para a flecha, todas as raízes de θ são isoladas em cada trecho polinomial, usando os extremos da derivada para particionar intervalos monótonos e então bisseção. Não se presume que θ seja monótona em toda a viga. Extremidades livres entram na busca do máximo; deslocamentos nelas não são forçados a zero.
 
 ### Caso de referência
 
@@ -82,13 +99,15 @@ Vão de 6 m, seção 20 × 50 cm, E = 30 GPa e q = 12 kN/m, sem carga pontual:
 | Tensão máxima de cisalhamento | 0,54 MPa |
 | Rotações em A e B | +1,728 e −1,728 mrad |
 
-Os testes também cobrem carga pontual central (`PL³/48EI`), excêntrica, superposição, cargas nos apoios, equilíbrio, salto de cortante e variação de rigidez.
+Os testes cobrem também balanço com carga na ponta (`PL³/3EI`), balanço sob carga distribuída (`qL⁴/8EI`), biengastada sob carga distribuída (`qL⁴/384EI`) e engastada-apoiada, além das situações biapoiadas já existentes. Os [exemplos e resultados de apoios](docs/apoios/README.md) mostram as convenções de sinal.
 
 ## API
 
-`GET /api/health` retorna o estado do processo. `POST /api/calculate`, com `Content-Type: application/json`, recebe os sete campos de `model` do arquivo de exemplo e retorna reações, inércia, rigidez, máximas, resíduos de equilíbrio e amostras para os diagramas. Entradas inválidas retornam HTTP 422 com `error`. JSON inválido retorna 400; tipo de conteúdo incorreto, 415; corpo ausente ou superior a 16 KiB, 413.
+`GET /api/health` retorna o estado do processo. `POST /api/calculate`, com `Content-Type: application/json`, recebe os sete campos numéricos do exemplo e, opcionalmente, `support_left`/`support_right`. Ausência dos apoios preserva o padrão articulado/móvel. Enumerações inválidas ou combinações instáveis retornam HTTP 422. O endpoint retorna reações verticais e de momento, inércia, rigidez, máximas, resíduos de equilíbrio e amostras. JSON inválido retorna 400; tipo de conteúdo incorreto, 415; corpo ausente ou superior a 16 KiB, 413.
 
-A resposta também inclui `section` (área e módulo resistente), `elastic_results` (carga total, tensões e rotações nos apoios) e `rotation_mrad` nas amostras. `GET /api/validation` retorna a comparação dos dez cenários; o resultado é calculado uma vez por processo e guardado em cache. Para recalcular após alterar o código, reinicie o servidor.
+A resposta inclui `supports`, `beam_type`, constantes de integração, `section`, `elastic_results` e `rotation_mrad` nas amostras. `reactions.left_moment_kn_m/right_moment_kn_m` são momentos externos anti-horários positivos. `extrema.moment_kn_m` é o máximo absoluto; `signed_moment_kn_m` guarda seu sinal e `positive_moment_kn_m/negative_moment_kn_m` guardam os extremos sagente e negativo. `GET /api/validation` retorna a comparação dos 21 cenários, calculada uma vez por processo e guardada em cache. Para recalcular após alterar o código, reinicie o servidor.
+
+Arquivos de projeto novos usam `format: estrutura-beam`, `version: 2`, `units: m-kN-GPa` e os dois apoios dentro de `model`. A importação versão 1 mantém apenas os sete campos numéricos originais e assume articulado/móvel. Versão 2 sem um dos apoios é rejeitada; uma versão 1 contendo apoios também é rejeitada para evitar interpretação ambígua. Veja `examples/viga-balanco.json` e o exemplo legado `examples/viga-distribuida.json`.
 
 ## Limites e próximos módulos
 

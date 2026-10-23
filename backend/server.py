@@ -33,7 +33,7 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_GET(self):
         if urlsplit(self.path).path == "/api/health":
-            self.json_response(200, {"status": "ok", "version": "0.2.0"})
+            self.json_response(200, {"status": "ok", "version": "0.2.1"})
             return
         if urlsplit(self.path).path == "/api/validation":
             self.json_response(200, run_validation())

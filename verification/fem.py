@@ -69,7 +69,12 @@ def solve(model, subdivisions=32):
                 stiffness[row][col] += matrix[local_row][local_col]
         elements.append((start, span, dofs, matrix, equivalent))
     force[2 * nodes.index(a)] += point
-    restrained = {0, size - 2}
+    restrained = set()
+    for support, translation, rotation in [(model.get("support_left", "pinned"), 0, 1), (model.get("support_right", "roller"), size - 2, size - 1)]:
+        if support != "free":
+            restrained.add(translation)
+        if support == "fixed":
+            restrained.add(rotation)
     free = [i for i in range(size) if i not in restrained]
     reduced = [[stiffness[row][col] for col in free] for row in free]
     solution = solve_banded_spd(reduced, [force[i] for i in free])
@@ -93,7 +98,7 @@ def solve(model, subdivisions=32):
             if 0 < stationary < span:
                 candidates.append(stationary)
         for x in candidates:
-            maximum_moment = max(maximum_moment, end_force[1] - end_force[0] * x - q * x * x / 2)
+            maximum_moment = max(maximum_moment, abs(end_force[1] - end_force[0] * x - q * x * x / 2))
         maximum_shear = max(maximum_shear, abs(end_force[0]), abs(-end_force[0] - q * span))
         left, rotation_left, right, rotation_right = local
         coefficients = [
@@ -114,7 +119,7 @@ def solve(model, subdivisions=32):
                 candidates.extend(((-linear + math.sqrt(discriminant)) / (2 * quadratic), (-linear - math.sqrt(discriminant)) / (2 * quadratic)))
         for xi in candidates:
             if 0 <= xi <= 1:
-                maximum_deflection = max(maximum_deflection, sum(c * xi ** power for power, c in enumerate(coefficients)))
+                maximum_deflection = max(maximum_deflection, abs(sum(c * xi ** power for power, c in enumerate(coefficients))))
         interpolation.append((span, coefficients))
 
     def at(x):
@@ -126,8 +131,10 @@ def solve(model, subdivisions=32):
     modulus = width * height ** 2 / 6
     return {
         "elements": len(elements),
-        "left_kn": reactions[0],
-        "right_kn": reactions[size - 2],
+        "left_kn": reactions.get(0, 0.0),
+        "right_kn": reactions.get(size - 2, 0.0),
+        "left_moment_kn_m": reactions.get(1, 0.0),
+        "right_moment_kn_m": reactions.get(size - 1, 0.0),
         "moment_kn_m": maximum_moment,
         "deflection_mm": maximum_deflection * 1000,
         "absolute_shear_kn": maximum_shear,

@@ -61,8 +61,26 @@ class HTTPIntegration(unittest.TestCase):
         self.assertEqual(status, 200)
         report = json.loads(body)
         self.assertTrue(report["passed"])
-        self.assertEqual(report["passed_checks"], 90)
-        self.assertEqual(report["total_cases"], 10)
+        self.assertEqual(report["passed_checks"], 231)
+        self.assertEqual(report["total_cases"], 21)
+
+    def test_support_reactions_through_api(self):
+        for supports, expected_moment, expected_deflection in [
+            ({"support_left": "fixed", "support_right": "fixed"}, 36, 0.648),
+            ({"support_left": "fixed", "support_right": "free"}, 216, 31.104),
+        ]:
+            with self.subTest(supports=supports):
+                status, _headers, body = self.request("POST", "/api/calculate", json.dumps(BASE | supports), {"Content-Type": "application/json"})
+                self.assertEqual(status, 200)
+                result = json.loads(body)
+                self.assertAlmostEqual(result["reactions"]["left_moment_kn_m"], expected_moment)
+                self.assertAlmostEqual(result["extrema"]["deflection_mm"], expected_deflection)
+
+    def test_unstable_supports_rejected_through_api(self):
+        for left, right in [("roller", "roller"), ("pinned", "free"), ("free", "free")]:
+            status, _headers, body = self.request("POST", "/api/calculate", json.dumps(BASE | {"support_left": left, "support_right": right}), {"Content-Type": "application/json"})
+            self.assertEqual(status, 422)
+            self.assertIn("instável", json.loads(body)["error"])
 
     def test_invalid_requests_return_useful_errors(self):
         cases = [

@@ -177,16 +177,24 @@ export class BeamView3D {
     }
     // Apoios apenas esquemáticos, fora do volume da viga.
     const supportSize = Math.min(extent * 0.045, m.height_m * 0.5);
-    for (const [x, roller] of [[0, false], [m.span_m, true]] as const) {
+    for (const [x, support] of [[0, m.support_left ?? 'pinned'], [m.span_m, m.support_right ?? 'roller']] as const) {
+      if (support === 'free') continue;
+      if (support === 'fixed') {
+        const thickness = extent * 0.035;
+        const wall = new THREE.Mesh(new THREE.BoxGeometry(thickness, m.height_m * 1.6, Math.max(m.width_m * 2, extent * 0.09)), new THREE.MeshStandardMaterial({ color: 0x9cabae, roughness: 1 }));
+        wall.position.set(x + (x === 0 ? -thickness / 2 : thickness / 2), m.height_m / 2, 0);
+        this.group.add(wall);
+        continue;
+      }
       const shape = new THREE.Shape();
       shape.moveTo(-supportSize, -supportSize * 1.4);
       shape.lineTo(supportSize, -supportSize * 1.4);
       shape.lineTo(0, 0);
       shape.closePath();
-      const support = new THREE.Mesh(new THREE.ExtrudeGeometry(shape, { depth: m.width_m * 1.25, bevelEnabled: false }), new THREE.MeshStandardMaterial({ color: 0xa6b7ba, roughness: 1 }));
-      support.position.set(x, 0, -m.width_m * 0.625);
-      this.group.add(support);
-      if (roller) {
+      const supportMesh = new THREE.Mesh(new THREE.ExtrudeGeometry(shape, { depth: m.width_m * 1.25, bevelEnabled: false }), new THREE.MeshStandardMaterial({ color: 0xa6b7ba, roughness: 1 }));
+      supportMesh.position.set(x, 0, -m.width_m * 0.625);
+      this.group.add(supportMesh);
+      if (support === 'roller') {
         const wheel = new THREE.Mesh(new THREE.CylinderGeometry(supportSize * 0.25, supportSize * 0.25, m.width_m * 1.25, 16), new THREE.MeshStandardMaterial({ color: 0x728d94 }));
         wheel.rotation.x = Math.PI / 2;
         wheel.position.set(x, -supportSize * 1.65, 0);
@@ -214,6 +222,8 @@ export class BeamView3D {
     this.container.dataset.span = String(m.span_m);
     this.container.dataset.width = String(m.width_m);
     this.container.dataset.height = String(m.height_m);
+    this.container.dataset.supportLeft = m.support_left ?? 'pinned';
+    this.container.dataset.supportRight = m.support_right ?? 'roller';
     this.render(true);
   }
 }

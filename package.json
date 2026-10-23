@@ -1,8 +1,8 @@
 {
   "name": "estrutura-prototipo",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
-  "description": "Protótipo independente de análise elástica de vigas biapoiadas",
+  "description": "Protótipo independente de análise elástica de vigas com apoios selecionáveis",
   "scripts": {
     "build": "tsc --noEmit && node scripts/build.mjs",
     "start": "python3 -m backend.server",

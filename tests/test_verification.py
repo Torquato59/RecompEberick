@@ -8,10 +8,10 @@ from verification.report import run_validation
 
 
 class IndependentVerification(unittest.TestCase):
-    def test_ten_benchmarks_and_ninety_comparisons(self):
+    def test_all_support_benchmarks(self):
         report = run_validation()
-        self.assertEqual(report["total_cases"], 10)
-        self.assertEqual(report["total_checks"], 90)
+        self.assertEqual(report["total_cases"], 21)
+        self.assertEqual(report["total_checks"], 231)
         for case in report["cases"]:
             for check in case["checks"]:
                 with self.subTest(case=case["id"], quantity=check["quantity"]):

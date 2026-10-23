@@ -1,0 +1,16 @@
+{
+  "format": "estrutura-beam",
+  "version": 2,
+  "units": "m-kN-GPa",
+  "model": {
+    "span_m": 6,
+    "elastic_modulus_gpa": 30,
+    "width_m": 0.2,
+    "height_m": 0.5,
+    "uniform_load_kn_m": 0,
+    "point_load_kn": 20,
+    "point_position_m": 6,
+    "support_left": "fixed",
+    "support_right": "free"
+  }
+}
